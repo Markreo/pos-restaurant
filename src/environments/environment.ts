@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  gms_api_server: 'https://dev-gms.api.easygolf.vn',
+  gms_api_inventory: 'https://dev-inventory.api.easygolf.vn',
+  gms_websocket_server: 'wss://dev-inventory.api.easygolf.vn/websocket',
+  api_version: '1.0',
+  version: '1.3.7',
+  secured_cookie: false,
+  main_domain: 'localhost'
 };
 
 /*
