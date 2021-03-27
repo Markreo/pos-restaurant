@@ -115,6 +115,6 @@ export class SelectLocationPage implements OnInit {
 
   handleSave() {
     this.locationService.setLocation(this.form.get('location'));
-    this.router.navigate(['/order']);
+    this.router.navigate(['/home']);
   }
 }
