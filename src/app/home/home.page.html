@@ -1,10 +1,11 @@
 <ion-app>
-  <ion-content>
-    <div style="height: 100%; width: 100%; background: white; display: flex; align-items: stretch">
-      <div style="width: 100px; background: white">
+  <ion-content [fullscreen]="true">
+    <div style="height: 100%; width: 100%; background: white; display: flex; align-items: stretch; overflow: hidden">
+      <div
+        style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
         <div class="logo" style="height: 100px; background:#184a7b">
         </div>
-        <div class="menu">
+        <div class="menu" style="flex: 1; overflow: auto">
           <div class="menu-item">
             <img src="http://placehold.it/100"/>
           </div>
@@ -17,36 +18,59 @@
           <div class="menu-item">
             <img src="http://placehold.it/100"/>
           </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+
         </div>
       </div>
-      <div style="flex: 1; display: flex; flex-direction: column;; background: #eeedf3">
+      <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; background: #eeedf3">
         <div class="header" style="height: 100px; display: flex; padding: 22.5px">
           <div class="search" style="background: white; flex: 1">
+            Searh...
           </div>
           <button style="margin-left: 22.5px">LAN</button>
           <button style="margin-left: 22.5px">LOCK</button>
         </div>
-        <div class="main-content" style=" flex: 1; display: flex; align-items: stretch; padding: 10px">
-          <div class="order" style="flex: 1; display: flex; flex-direction: column">
-            <div class="categories" style="height: 50px; display: flex; padding: 12.5px">
-              <div class="category-item active"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; background: white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
-              <div class="category-item"
-                   style="width: 75px; height: 30px; margin-right: 22.5px; border: 4px dashed white"></div>
+        <div class="main-content"
+             style=" flex: 1; display: flex; align-items: stretch; padding: 10px; overflow: hidden; min-width: 0">
+          <div class="order" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0">
+            <div class="categories"
+                 style="height: 50px;  padding: 12.5px; overflow: auto; display: flex; flex-wrap: nowrap; min-width: 0; width: 100%">
+              <div class="category-item active"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
             </div>
-            <div class="items" style="flex: 1;">
+            <div class="items" style="flex: 1; overflow: auto">
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+
               <div class="item"></div>
               <div class="item"></div>
               <div class="item"></div>
@@ -78,7 +102,8 @@
               <div></div>
               <div style="flex: 1"></div>
               <div style="padding: 22.5px; ">
-                <button style="display: block; width: 100%; height: 50px; font-weight: bold; border-radius: 22.5px ;text-align: center; background: #ffcb2a; color: #184c7c;; overflow: hidden">
+                <button
+                  style="display: block; width: 100%; height: 50px; font-weight: bold; border-radius: 22.5px ;text-align: center; background: #ffcb2a; color: #184c7c;; overflow: hidden">
                   SUBMIT ORDER
                 </button>
               </div>
