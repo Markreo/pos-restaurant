@@ -1,5 +1,5 @@
 import {environment} from '../../environments/environment';
 
 export function buildUrl(endpoint, id?: string) {
-  return environment.api_version + '/' + endpoint;
+  return environment.gms_api_server + '/' + environment.api_version + '/' + endpoint;
 }

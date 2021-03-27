@@ -14,7 +14,7 @@ export class AuthService {
 
 
   login(loginData: { username: string, password: string }) {
-    return this.http.post<any>(buildUrl('auth/login'), {
+    return this.http.post<any>(buildUrl('auth/token'), {
       username: loginData.username,
       password: loginData.password,
     }).pipe(
