@@ -1,27 +1,28 @@
-
 .items {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-
   .item {
     width: 190px;
     height: 220px;
     background: white;
     margin: 12.5px;
+    border-radius: 11.25px;
   }
 }
 
 
 .category-item {
   width: 75px;
-  height: 30px;
   margin-right: 22.5px;
   border: 4px dashed white;
   min-width: 75px;
+  border-radius: 7.125px;
 
   &.active {
     background: white;
     border: 0;
   }
+}
+
+
+ion-searchbar {
+  --background: transparent
 }

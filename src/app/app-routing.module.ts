@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'logout',
     loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
   },
+  {
+    path: 'select-location',
+    loadChildren: () => import('./select-location/select-location.module').then( m => m.SelectLocationPageModule)
+  },
 ];
 
 @NgModule({
