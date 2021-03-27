@@ -6,31 +6,10 @@
         <div class="logo" style="height: 100px; background:#184a7b">
         </div>
         <div class="menu" style="flex: 1; overflow: auto">
-          <div class="menu-item">
+          <div class="menu-item" *ngFor="let cate of parentCategories">
             <img src="http://placehold.it/100"/>
+            {{cate.name}}
           </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-          <div class="menu-item">
-            <img src="http://placehold.it/100"/>
-          </div>
-
         </div>
       </div>
       <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; background: #eeedf3">
@@ -50,16 +29,9 @@
         <div class="main-content"
              style=" flex: 1; display: flex; align-items: stretch; padding: 10px; overflow: hidden; min-width: 0">
           <div class="order" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0">
-            <div class="categories"
-                 style="height: 50px;  padding: 12.5px; overflow: auto; display: flex; flex-wrap: nowrap; min-width: 0; width: 100%">
-              <div class="category-item active"></div>
-              <div class="category-item"></div>
-              <div class="category-item"></div>
-              <div class="category-item"></div>
-              <div class="category-item"></div>
-              <div class="category-item"></div>
-              <div class="category-item"></div>
-              <div class="category-item"></div>
+            <div class="categories">
+              <div class="category-item active">All</div>
+              <div class="category-item" *ngFor="let subCate of subCategories">{{subCate.name}}</div>
             </div>
             <div class="items" style="flex: 1; overflow: auto">
               <ion-slides>
@@ -93,8 +65,10 @@
             </div>
           </div>
           <div class="payment" style="width: 375px; display: flex; flex-direction: column; padding: 15px">
-            <div class="payment-header" style="height: 50px" *ngIf="location">
+            <div class="payment-header" style="height: 50px; color: #184c7c; display: flex; justify-content: space-between" *ngIf="location">
+            <div>
               {{location.name}} | <strong>Table H-03</strong>
+            </div>
               <button>Bell</button>
             </div>
             <div class="payment-content"

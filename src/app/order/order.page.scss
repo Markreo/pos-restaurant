@@ -8,13 +8,28 @@
   }
 }
 
+.categories {
+  min-height: 50px;
+  padding: 12.5px;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  width: 100%
+}
 
 .category-item {
-  width: 75px;
   margin-right: 22.5px;
-  border: 4px dashed white;
+  margin-bottom: 7.125px;
+  border: 1px solid white;
   min-width: 75px;
+  padding: 2px 5px;
   border-radius: 7.125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #184c7c;
+  font-size: 90%;
 
   &.active {
     background: white;

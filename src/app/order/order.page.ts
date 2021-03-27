@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocationEntity} from '../_models/location.entity';
 import {LocationService} from '../_services/location.service';
 import {Router} from '@angular/router';
@@ -12,6 +12,10 @@ import {take} from 'rxjs/operators';
 })
 export class OrderPage implements OnInit {
   location: LocationEntity;
+  rawCategories = [];
+  parentCategories = [];
+  subCategories = [];
+
 
   constructor(private locationService: LocationService,
               private router: Router, private categoryService: CategoryService) {
@@ -33,6 +37,9 @@ export class OrderPage implements OnInit {
   loadCategory() {
     this.categoryService.getAll(this.location.id).subscribe(categories => {
       console.log('categories', categories);
+      this.rawCategories = categories;
+      this.parentCategories = categories.filter(cate => !cate.parent_id);
+      this.subCategories = categories.filter(cate => !!cate.parent_id);
     });
   }
 }
