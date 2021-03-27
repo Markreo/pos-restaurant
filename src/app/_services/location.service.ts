@@ -13,14 +13,11 @@ export class LocationService {
   constructor(private storage: Storage, private http: HttpClient) {
   }
 
-  getLocation(): Observable<LocationEntity> {
+  getCurrentLocation(): Observable<LocationEntity> {
     if (this.currentLocation) {
-      console.log('service location');
       return of(this.currentLocation);
     } else {
-      console.log('load storage');
       this.storage.get('location').then(location => {
-        console.log('location', location);
       });
       return from(this.storage.get('location')).pipe(
         tap(location => this.currentLocation = location)

@@ -22,6 +22,8 @@ export class SelectLocationPage implements OnInit {
     location: new FormControl(null, Validators.required),
   });
 
+  // todo: return back url
+  // todo: init value location
   constructor(private locationService: LocationService,
               private golfClubService: GolfClubService,
               private loadingCtrl: LoadingController,

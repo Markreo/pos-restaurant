@@ -1,9 +1,116 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>order</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-content [fullscreen]="true">
+    <div style="height: 100%; width: 100%; background: white; display: flex; align-items: stretch; overflow: hidden">
+      <div
+        style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
+        <div class="logo" style="height: 100px; background:#184a7b">
+        </div>
+        <div class="menu" style="flex: 1; overflow: auto">
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
+          <div class="menu-item">
+            <img src="http://placehold.it/100"/>
+          </div>
 
-<ion-content>
+        </div>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; background: #eeedf3">
+        <div class="header" style="height: 100px; display: flex; padding: 22.5px">
+          <div class="search"
+               style="background: white; flex: 1; border-radius: 22.5px; display: flex; align-items: center; padding: 10px 22.5px">
+            <div style="border-right: 2px solid black; padding-right: 10px; white-space: nowrap">
+              Food & Beverages
+            </div>
+            <div style="padding-left: 10px; flex: 1">
+              <ion-searchbar [placeholder]="'Search for Items'"></ion-searchbar>
+            </div>
+          </div>
+          <button style="margin-left: 22.5px">LAN</button>
+          <button style="margin-left: 22.5px">LOCK</button>
+        </div>
+        <div class="main-content"
+             style=" flex: 1; display: flex; align-items: stretch; padding: 10px; overflow: hidden; min-width: 0">
+          <div class="order" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0">
+            <div class="categories"
+                 style="height: 50px;  padding: 12.5px; overflow: auto; display: flex; flex-wrap: nowrap; min-width: 0; width: 100%">
+              <div class="category-item active"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+              <div class="category-item"></div>
+            </div>
+            <div class="items" style="flex: 1; overflow: auto">
+              <ion-slides>
+                <ion-slide>
+                  <div style="display: flex; flex-wrap: wrap; align-content: flex-start;">
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
 
-</ion-content>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                  </div>
+                </ion-slide>
+                <ion-slide>
+                  <h1>Slide 2</h1>
+                </ion-slide>
+                <ion-slide>
+                  <h1>Slide 3</h1>
+                </ion-slide>
+              </ion-slides>
+
+            </div>
+            <div class="items-pagination"
+                 style="display: flex; justify-content: center; align-items: center; padding: 15px">
+              <div style="height: 10px; width: 50px; background: #ffcb2a; border-radius: 20%; margin: 7.5px"></div>
+              <div style="height: 10px; width: 50px; background: #ffcb2a; border-radius: 20%; margin: 7.5px"></div>
+              <div style="height: 10px; width: 50px; background: #ffcb2a; border-radius: 20%; margin: 7.5px"></div>
+            </div>
+          </div>
+          <div class="payment" style="width: 375px; display: flex; flex-direction: column; padding: 15px">
+            <div class="payment-header" style="height: 50px" *ngIf="location">
+              {{location.name}} | <strong>Table H-03</strong>
+              <button>Bell</button>
+            </div>
+            <div class="payment-content"
+                 style="background: white; flex: 1; display: flex; flex-direction: column; border-radius: 11.25px">
+              <div></div>
+              <div style="flex: 1"></div>
+              <div style="padding: 22.5px; ">
+                <button
+                  style="display: block; width: 100%; height: 50px; font-weight: bold; border-radius: 22.5px ;text-align: center; background: #ffcb2a; color: #184c7c;; overflow: hidden">
+                  SUBMIT ORDER
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-app>

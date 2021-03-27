@@ -8,13 +8,13 @@
   <form [formGroup]="form" class="ion-padding">
     <ion-item *ngIf="golfClubs">
       <ion-label>Club:</ion-label>
-      <ion-select [compareWith]="compareWith" formControlName="golfClub" interface="action-sheet" >
+      <ion-select [compareWith]="compareWith" formControlName="golfClub" interface="action-sheet">
         <ion-select-option *ngFor="let club of golfClubs" [value]="club">{{club.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Location:</ion-label>
-      <ion-select [compareWith]="compareWith" formControlName="location" interface="action-sheet" >
+      <ion-select [compareWith]="compareWith" formControlName="location" interface="action-sheet">
         <ion-select-option *ngFor="let location of locations" [value]="location">{{location.name}}</ion-select-option>
       </ion-select>
     </ion-item>
