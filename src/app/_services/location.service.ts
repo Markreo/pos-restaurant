@@ -15,8 +15,13 @@ export class LocationService {
 
   getLocation(): Observable<LocationEntity> {
     if (this.currentLocation) {
+      console.log('service location');
       return of(this.currentLocation);
     } else {
+      console.log('load storage');
+      this.storage.get('location').then(location => {
+        console.log('location', location);
+      });
       return from(this.storage.get('location')).pipe(
         tap(location => this.currentLocation = location)
       );

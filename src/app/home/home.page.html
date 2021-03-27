@@ -93,8 +93,8 @@
             </div>
           </div>
           <div class="payment" style="width: 375px; display: flex; flex-direction: column; padding: 15px">
-            <div class="payment-header" style="height: 50px">
-              Golf Restaurant | <strong>Table H-03</strong>
+            <div class="payment-header" style="height: 50px" *ngIf="location">
+              {{location.name}} | <strong>Table H-03</strong>
               <button>Bell</button>
             </div>
             <div class="payment-content"

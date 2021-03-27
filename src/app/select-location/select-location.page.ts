@@ -29,7 +29,6 @@ export class SelectLocationPage implements OnInit {
               private router: Router,
               private authService: AuthService) {
     this.form.get('golfClub').valueChanges.subscribe(golfClub => {
-      console.log('golf club change');
       if (golfClub) {
         this.loadLocation(golfClub);
       }
@@ -114,7 +113,7 @@ export class SelectLocationPage implements OnInit {
   };
 
   handleSave() {
-    this.locationService.setLocation(this.form.get('location'));
+    this.locationService.setLocation(this.form.get('location').value);
     this.router.navigate(['/home']);
   }
 }
