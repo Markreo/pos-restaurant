@@ -33,4 +33,9 @@ export class LocationService {
     this.currentLocation = location;
     this.storage.set('location', {id: location.id, name: location.name});
   }
+
+  clean() {
+    this.currentLocation = null;
+    this.storage.remove('location');
+  }
 }

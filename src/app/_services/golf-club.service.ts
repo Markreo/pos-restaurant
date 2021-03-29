@@ -25,7 +25,7 @@ export class GolfClubService {
 
 
   getAllByUser() {
-    return this.http.get(buildUrl('golf/clubs'));
+    return this.http.get<GolfClubEntity[]>(buildUrl('golf/clubs'));
   }
 
 
@@ -37,5 +37,10 @@ export class GolfClubService {
       });
       this.currentGolfClub = golfClub;
     }
+  }
+
+  clean() {
+    this.currentGolfClub = null;
+    this.storage.remove('golf-club');
   }
 }

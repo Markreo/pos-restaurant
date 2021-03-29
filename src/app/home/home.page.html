@@ -1,107 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tables
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-<!--  todo: if tables empty-->
-  <ion-list *ngIf="!loadingTable">
-    <ion-item *ngFor="let table of tables" [routerLink]="['/order', table.id]">
-      <ion-label>{{table.name}}</ion-label>
-    </ion-item>
-  </ion-list>
-  <div *ngIf="loadingTable">
-    <div class="ion-padding custom-skeleton">
-      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-      <ion-skeleton-text animated></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-    </div>
+ <div style="padding: 22.5px">
+   <form [formGroup]="form" class="ion-padding">
+     <ion-item *ngIf="golfClubs">
+       <ion-label>Club:</ion-label>
+       <ion-select [compareWith]="compareWith" formControlName="golfClub" interface="action-sheet">
+         <ion-select-option *ngFor="let club of golfClubs" [value]="club">{{club.name}}</ion-select-option>
+       </ion-select>
+     </ion-item>
+     <ion-item>
+       <ion-label>Location:</ion-label>
+       <ion-select [compareWith]="compareWith" formControlName="location" interface="action-sheet">
+         <ion-select-option *ngFor="let location of locations" [value]="location">{{location.name}}</ion-select-option>
+       </ion-select>
+     </ion-item>
+   </form>
+   <ion-list *ngIf="form.valid">
+     <div style="color: #184c7c">
+       <strong>Choose</strong> Table
+     </div>
+     <ng-container *ngIf="!loadingTable">
+       <ion-item *ngFor="let table of tables" [routerLink]="['/order', table.id]">
+         <ion-label>{{table.name}}</ion-label>
+       </ion-item>
 
-    <ion-list>
-      <ion-list-header>
-        <ion-label>
-          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
-        </ion-label>
-      </ion-list-header>
-      <ion-item>
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
-        <ion-label>
-          <h3>
-            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-          </h3>
-          <p>
-            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-          </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-thumbnail>
-        <ion-label>
-          <h3>
-            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-          </h3>
-          <p>
-            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-          </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
-        <ion-label>
-          <h3>
-            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-          </h3>
-          <p>
-            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-          </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
-        <ion-label>
-          <h3>
-            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-          </h3>
-          <p>
-            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-          </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
-        <ion-label>
-          <h3>
-            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
-          </h3>
-          <p>
-            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
-          </p>
-          <p>
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
+     </ng-container>
+     <div *ngIf="loadingTable" class="ion-padding">
+       Đang tải thông tin...
+     </div>
+   </ion-list>
+ </div>
 </ion-content>
