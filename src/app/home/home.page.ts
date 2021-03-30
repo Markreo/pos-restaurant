@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
   form: FormGroup = new FormGroup({
     golfClub: new FormControl(null, Validators.required),
     location: new FormControl(null, Validators.required),
+    search: new FormControl(null)
   });
   loadingTable = true;
   getLocationSubscription: Observable<Location[]>;
@@ -86,14 +87,18 @@ export class HomePage implements OnInit {
       this.locations = locations;
 
       if (!this.initLocation) {
-        console.log('dissmiss');
-        this.loadingCtrl.dismiss();
+
         this.initLocation = true;
         this.locationService.getCurrentLocation().subscribe(location => {
           if (location) {
             this.form.get('location').setValue(location);
           }
         });
+
+        setTimeout(() => {
+          console.log('dissmiss');
+          this.loadingCtrl.dismiss();
+        }, 500);
       }
     });
   }
@@ -113,6 +118,7 @@ export class HomePage implements OnInit {
   }
 
   async presentLoading(message) {
+    console.log('presentLoading');
     const loading = await this.loadingCtrl.create({
       spinner: 'circular',
       message,

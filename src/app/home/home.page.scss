@@ -1,0 +1,69 @@
+.header-form {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+
+  > div {
+    background: white;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    padding: 0 22.5px;
+    min-width: 300px;
+    margin-right: 22.5px;
+
+    .label {
+      white-space: nowrap;
+      font-size: 110%;
+      border-right: 2px solid black;
+      padding-right: 11.125px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .header-form > div {
+    min-width: 150px;
+  }
+}
+
+:host ::ng-deep {
+  .select-text {
+    font-weight: bolder;
+    color: red;
+  }
+}
+
+ion-select {
+  font-weight: bolder;
+}
+
+
+ion-content {
+  --background: #eeedf3
+
+}
+
+
+ion-searchbar {
+  --background: transparent;
+  --box-shadow: none;
+}
+
+.item {
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 0 10px 10px 0;
+}
+
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: flex-start;
+}

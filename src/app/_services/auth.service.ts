@@ -5,11 +5,19 @@ import {throwError} from 'rxjs';
 import {Storage} from '@ionic/storage';
 import {Router} from '@angular/router';
 import {buildUrl} from '../_helpers/functions';
+import {LocationService} from './location.service';
+import {GolfClubService} from './golf-club.service';
+import {TableService} from './table.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  constructor(private http: HttpClient, private storage: Storage, private router: Router) {
+  constructor(private http: HttpClient,
+              private locationService: LocationService,
+              private golfClubService: GolfClubService,
+              private tableService: TableService,
+              private storage: Storage,
+              private router: Router) {
   }
 
 
@@ -43,6 +51,9 @@ export class AuthService {
   }
 
   async logout() {
+    this.tableService.clean();
+    this.golfClubService.clean();
+    this.locationService.clean();
     await this.storage.remove('TOKEN');
     await this.storage.remove('login_data');
     await this.router.navigate(['/login']);

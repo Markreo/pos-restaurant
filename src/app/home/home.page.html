@@ -1,32 +1,50 @@
 <ion-content [fullscreen]="true">
- <div style="padding: 22.5px">
-   <form [formGroup]="form" class="ion-padding">
-     <ion-item *ngIf="golfClubs">
-       <ion-label>Club:</ion-label>
-       <ion-select [compareWith]="compareWith" formControlName="golfClub" interface="action-sheet">
-         <ion-select-option *ngFor="let club of golfClubs" [value]="club">{{club.name}}</ion-select-option>
-       </ion-select>
-     </ion-item>
-     <ion-item>
-       <ion-label>Location:</ion-label>
-       <ion-select [compareWith]="compareWith" formControlName="location" interface="action-sheet">
-         <ion-select-option *ngFor="let location of locations" [value]="location">{{location.name}}</ion-select-option>
-       </ion-select>
-     </ion-item>
-   </form>
-   <ion-list *ngIf="form.valid">
-     <div style="color: #184c7c">
-       <strong>Choose</strong> Table
-     </div>
-     <ng-container *ngIf="!loadingTable">
-       <ion-item *ngFor="let table of tables" [routerLink]="['/order', table.id]">
-         <ion-label>{{table.name}}</ion-label>
-       </ion-item>
+  <div style="display: flex; flex-direction: column; overflow: hidden;  ">
+    <div style="padding: 25px; display: flex">
+      <form [formGroup]="form" class="header-form">
+        <div *ngIf="golfClubs">
+          <div class="label ion-hide-xl-down">
+            <ion-label>Golf Club</ion-label>
+          </div>
+          <ion-select [compareWith]="compareWith" formControlName="golfClub" interface="action-sheet"
+                      placeholder="Golf club">
+            <ion-select-option *ngFor="let club of golfClubs" [value]="club">{{club.name}}</ion-select-option>
+          </ion-select>
+        </div>
+        <div>
+          <div class="label ion-hide-xl-down">
+            <ion-label>Location</ion-label>
+          </div>
+          <ion-select [compareWith]="compareWith" formControlName="location" interface="action-sheet"
+                      placeholder="Location">
+            <ion-select-option *ngFor="let location of locations"
+                               [value]="location">{{location.name}}</ion-select-option>
+          </ion-select>
+        </div>
+        <div style="flex: 1; min-width: 200px" class="ion-hide-md-down">
+          <ion-searchbar [placeholder]="'Search for Items'"></ion-searchbar>
+        </div>
+      </form>
+      <div style="display: flex; align-items: center">
+        <button style="margin-left: 22.5px">LAN</button>
+        <button style="margin-left: 22.5px" [routerLink]="['/logout']">LOGOUT</button>
+      </div>
+    </div>
+    <div style="flex: 1; min-height: 0; padding: 22.5px">
+      <div *ngIf="form.valid">
+        <div style="color: #184c7c; font-size: 110%; margin-bottom: 15px">
+          <strong>Choose</strong> Table
+        </div>
+        <div class="items" *ngIf="!loadingTable">
+          <div class="item" *ngFor="let table of tables" [routerLink]="['/order', table.id]">
+            <ion-label>{{table.name}}</ion-label>
+          </div>
+        </div>
+      </div>
 
-     </ng-container>
-     <div *ngIf="loadingTable" class="ion-padding">
-       Đang tải thông tin...
-     </div>
-   </ion-list>
- </div>
+      <div *ngIf="loadingTable" class="ion-padding">
+        Đang tải thông tin...
+      </div>
+    </div>
+  </div>
 </ion-content>

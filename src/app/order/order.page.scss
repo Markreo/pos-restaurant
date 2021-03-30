@@ -1,3 +1,9 @@
+
+ion-content {
+  --background: #eeedf3
+
+}
+
 .items {
   .item {
     width: 190px;
@@ -39,5 +45,6 @@
 
 
 ion-searchbar {
-  --background: transparent
+  --background: transparent;
+  --box-shadow: none;
 }
