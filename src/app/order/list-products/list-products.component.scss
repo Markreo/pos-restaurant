@@ -1,0 +1,16 @@
+:host {
+  ::ng-deep .item {
+    position: relative;
+    overflow: hidden;
+    width: 190px;
+    height: 220px;
+    background: white;
+    margin: 12.5px;
+    border-radius: 11.25px;
+
+    &:hover{
+      border: 2px solid #ffcb2a;
+    }
+  }
+
+}

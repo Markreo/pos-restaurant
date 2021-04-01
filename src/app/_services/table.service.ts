@@ -15,4 +15,8 @@ export class TableService {
   clean() {
 
   }
+
+  get(golfClubId, tableId) {
+    return this.http.get<Table>(buildUrl(`golf/clubs/${golfClubId}/tables/${tableId}`));
+  }
 }
