@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div *ngIf="loadingTable" class="ion-padding">
+      <div *ngIf="loadingTable && form.valid" class="ion-padding">
         Đang tải thông tin...
       </div>
     </div>

@@ -71,6 +71,7 @@ export class HomePage implements OnInit {
           this.form.get('golfClub').setValue(currentGolfClub);
         } else {
           if (golfClubs.length === 1) {
+            this.golfClubService.setCurrentGolfClub(golfClubs[0]);
             this.form.get('golfClub').setValue(golfClubs[0]);
           } // else user select
         }
@@ -129,7 +130,7 @@ export class HomePage implements OnInit {
 
   showAlertLogout() {
     this.alertController.create({
-      header: 'Không có Golf CLub nào!',
+      header: 'Không có Golf Club nào!',
       subHeader: 'subHeader',
       message: 'Tài khoản của bạn không thể thực hiện thao tác này!',
       buttons: ['OK']

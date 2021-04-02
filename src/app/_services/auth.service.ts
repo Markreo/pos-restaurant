@@ -8,6 +8,7 @@ import {buildUrl} from '../_helpers/functions';
 import {LocationService} from './location.service';
 import {GolfClubService} from './golf-club.service';
 import {TableService} from './table.service';
+import {LoadingController} from '@ionic/angular';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
               private golfClubService: GolfClubService,
               private tableService: TableService,
               private storage: Storage,
+              private loadingController: LoadingController,
               private router: Router) {
   }
 
@@ -51,6 +53,7 @@ export class AuthService {
   }
 
   async logout() {
+    this.loadingController.dismiss();
     this.tableService.clean();
     this.golfClubService.clean();
     this.locationService.clean();
