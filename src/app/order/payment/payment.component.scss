@@ -1,0 +1,51 @@
+:host {
+  flex: 1;
+}
+
+.payment-content {
+  font-size: 80%;
+  background: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 11.25px;
+  overflow: hidden
+}
+
+.order-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.item-bagtag {
+  width: 10px;
+}
+
+.item-name {
+  flex: 1;
+}
+
+.item-qty {
+  width: 50px;
+  text-align: center;
+}
+
+.item-price {
+  width: 100px;
+  text-align: right;
+}
+
+ion-button.submit-btn {
+  display: block;
+  width: 100%;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 22.5px;
+  text-align: center;
+  --background: #ffcb2a;
+  --background-activated: #fcd66a;
+  --background-focused: #ffd148;
+  --background-hover: #ffd148;
+  --color: #184c7c;;
+  overflow: hidden
+}

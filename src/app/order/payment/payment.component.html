@@ -1,0 +1,41 @@
+<div class="payment-content">
+  <div *ngIf="loadingOrder" style="flex: 1; display: flex; justify-content: center; align-items: center">
+    <ion-spinner></ion-spinner>
+    Loading....
+  </div>
+  <div *ngIf="!loadingOrder">
+    <div
+      style="; margin: 22.5px 10px;border-radius: 11.25px; background: #e6e6e6; display: flex; justify-content: space-between; padding: 5px 10px">
+      <div>NT RSVT <span class="ion-color-danger">#125</span></div>
+      X
+    </div>
+    <div
+      style="border-bottom: 1px; display: flex; padding-bottom: 5px ; border-bottom: 1px solid #518ac6; margin: 10px">
+      <div class="item-bagtag"></div>
+      <div class="item-name">Items[5]</div>
+      <div class="item-qty">Qty</div>
+      <div class="item-price">Price</div>
+    </div>
+  </div>
+  <div *ngIf="!loadingOrder" style="flex: 1; padding: 10px; overflow: auto">
+    <div class="order-item" *ngFor="let item of order.items">
+      <div class="item-bagtag"></div>
+      <div style="flex: 1">
+        <strong>{{item.variant.name}}</strong>
+      </div>
+      <div class="item-qty">
+        {{item.quantity}}
+      </div>
+      <div class="item-price">
+        {{item.price}}
+      </div>
+    </div>
+  </div>
+  <div style="padding: 22.5px; ">
+    <ion-button
+      class="submit-btn"
+      [disabled]="loadingOrder">
+      SUBMIT ORDER
+    </ion-button>
+  </div>
+</div>

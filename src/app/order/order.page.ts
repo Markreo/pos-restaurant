@@ -43,12 +43,16 @@ export class OrderPage implements OnInit {
         take(1)
       )
       .subscribe(([params, location, golf]) => {
-        this.golfClub = golf;
-        this.location = location;
-        if (params.id) {
-          this.getTable(golf.id, params.id);
+        if (location && golf) {
+          this.golfClub = golf;
+          this.location = location;
+          if (params.id) {
+            this.getTable(golf.id, params.id);
+          }
+          this.loadCategory(location);
+        } else {
+          this.router.navigate(['/home']);
         }
-        this.loadCategory(location);
       });
   }
 

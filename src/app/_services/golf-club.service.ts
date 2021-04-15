@@ -25,6 +25,7 @@ export class GolfClubService {
 
 
   getAllByUser() {
+    console.log('getAllByUser')
     return this.http.get<GolfClubEntity[]>(buildUrl('golf/clubs'));
   }
 

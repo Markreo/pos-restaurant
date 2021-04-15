@@ -57,16 +57,19 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ngOnInit')
     this.presentLoading('Đang tải thông tin...');
     this.subscribeLoadLocation();
     this.subscribeTable();
     this.golfClubService.getAllByUser().subscribe(golfClubs => {
+      console.log('golfClubs', golfClubs);
       if (golfClubs && Array.isArray(golfClubs)) {
         this.golfClubs = golfClubs;
       }
       this.golfClubService.getCurrentGolfClub().pipe(
         delay(100)
       ).subscribe(currentGolfClub => {
+        console.log('currentGolfClub', currentGolfClub);
         if (currentGolfClub) {
           this.form.get('golfClub').setValue(currentGolfClub);
         } else {
