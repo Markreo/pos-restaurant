@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {AuthService} from '../_services/auth.service';
 import {Router} from '@angular/router';
@@ -22,6 +22,9 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     this.authService.isLogged().then(loginData => {
       if (loginData) {
         this.onLoginSuccess();

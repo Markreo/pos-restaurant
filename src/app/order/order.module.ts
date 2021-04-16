@@ -10,6 +10,7 @@ import { OrderPage } from './order.page';
 import {ListProductsComponent} from './list-products/list-products.component';
 import {ChildListProductsComponent} from './list-products/child-list-products/child-list-products.component';
 import {PaymentComponent} from './payment/payment.component';
+import {OrderItemComponent} from './payment/order-item/order-item.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import {PaymentComponent} from './payment/payment.component';
     IonicModule,
     OrderPageRoutingModule
   ],
-  declarations: [OrderPage, ListProductsComponent, ChildListProductsComponent, PaymentComponent]
+  declarations: [OrderPage, ListProductsComponent, ChildListProductsComponent, PaymentComponent, OrderItemComponent]
 })
 export class OrderPageModule {}

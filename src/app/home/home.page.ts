@@ -57,12 +57,13 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ngOnInit')
     this.presentLoading('Đang tải thông tin...');
     this.subscribeLoadLocation();
     this.subscribeTable();
+  }
+
+  ionViewDidEnter() {
     this.golfClubService.getAllByUser().subscribe(golfClubs => {
-      console.log('golfClubs', golfClubs);
       if (golfClubs && Array.isArray(golfClubs)) {
         this.golfClubs = golfClubs;
       }

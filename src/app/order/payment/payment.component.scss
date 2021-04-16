@@ -12,27 +12,32 @@
   overflow: hidden
 }
 
-.order-item {
-  display: flex;
-  margin-bottom: 10px;
-}
+:host {
+  ::ng-deep {
 
-.item-bagtag {
-  width: 10px;
-}
+    .item-bagtag {
+      width: 10px;
+    }
 
-.item-name {
-  flex: 1;
-}
+    .order-item {
+      display: flex;
+      margin-bottom: 10px;
+    }
 
-.item-qty {
-  width: 50px;
-  text-align: center;
-}
+    .item-name {
+      flex: 1;
+    }
 
-.item-price {
-  width: 100px;
-  text-align: right;
+    .item-qty {
+      width: 50px;
+      text-align: center;
+    }
+
+    .item-price {
+      width: 100px;
+      text-align: right;
+    }
+  }
 }
 
 ion-button.submit-btn {

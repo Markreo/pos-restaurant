@@ -6,6 +6,7 @@ export class OrderItem {
   };
   quantity;
   waiting_qty;
+  cooking_qty;
   price;
   grand_total;
 }

@@ -1,0 +1,15 @@
+<div class="order-item" [ngClass]="{
+    submitted: item.id && !item.waiting_qty && item.cooking_qty,
+    'wait-supply': item.id && item.waiting_qty,
+     done: item.id && !item.waiting_qty && !item.cooking_qty}">
+  <div class="item-bagtag"></div>
+  <div class="item-name">
+    <strong>{{item.variant.name}}</strong>
+  </div>
+  <div class="item-qty">
+    {{item.quantity}}
+  </div>
+  <div class="item-price">
+    {{item.price}}
+  </div>
+</div>
