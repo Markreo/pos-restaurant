@@ -5,13 +5,7 @@
     </div>
     <ng-container *ngIf="!loading">
       <div style="display: flex; flex-wrap: wrap; align-content: flex-start;">
-        <div class="item" *ngFor="let product of productsAtPage1">
-          <ion-img [src]="product.image ? product.image : 'http://placehold.it/380'"></ion-img>
-          <div style="position: absolute; bottom: 0; padding: 10px; width: 100%; background: white">
-            <strong>{{product.name}}</strong>
-            <div>{{product.formatted_sale_price}}</div>
-          </div>
-        </div>
+        <app-product-item *ngFor="let product of productsAtPage1" [product]="product"></app-product-item>
       </div>
       <div *ngIf="productsAtPage1.length == 0">
         Không có sản phẩm nào!

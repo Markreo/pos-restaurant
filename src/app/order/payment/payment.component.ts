@@ -50,7 +50,11 @@ export class PaymentComponent implements OnChanges {
   }
 
   initNewOrder() {
-this.order = new Order()
+    this.order = new Order();
+  }
+
+  addVariant(variant) {
+    
   }
 
 }

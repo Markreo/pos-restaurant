@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LocationEntity} from '../_models/location.entity';
 import {LocationService} from '../_services/location.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,6 +10,7 @@ import {GolfClubService} from '../_services/golf-club.service';
 import {isCombinedNodeFlagSet} from 'tslint';
 import {Table} from '../_models/table';
 import {GolfClubEntity} from '../_models/golf-club.entity';
+import {PaymentComponent} from './payment/payment.component';
 
 @Component({
   selector: 'app-order',

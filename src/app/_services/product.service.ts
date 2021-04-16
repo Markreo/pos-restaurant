@@ -11,4 +11,8 @@ export class ProductService {
   getAllWithFilter(locationId, filter) {
     return this.http.get<{ total: number, data: Product[] }>(buildInventoryUrl('stores/' + locationId + '/products') + `?start=${filter.start}&max=${filter.max}`);
   }
+
+  getVariants(productId) {
+
+  }
 }

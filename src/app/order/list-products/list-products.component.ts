@@ -1,10 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ProductService} from '../../_services/product.service';
 import {Subject} from 'rxjs';
 import {debounceTime, switchMap} from 'rxjs/operators';
 import {LocationEntity} from '../../_models/location.entity';
 import {Product} from '../../_models/product';
 import {IonSlides} from '@ionic/angular';
+import {Variant} from '../../_models/variant';
 
 @Component({
   selector: 'app-list-products',
