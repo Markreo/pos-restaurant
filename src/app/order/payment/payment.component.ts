@@ -5,13 +5,14 @@ import {Subject} from 'rxjs';
 import {debounceTime, filter, switchMap} from 'rxjs/operators';
 import {GolfClubEntity} from '../../_models/golf-club.entity';
 import {Order} from '../../_models/order';
+import {OrderItem} from '../../_models/order-item';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
 })
-export class PaymentComponent implements OnChanges {
+export class PaymentComponent implements OnInit, OnChanges {
   @Input() table: Table;
   @Input() golfClub: GolfClubEntity;
   orderSubject = new Subject<Table>();
@@ -19,7 +20,13 @@ export class PaymentComponent implements OnChanges {
   order: Order;
 
   constructor(private orderService: OrderService) {
+  }
+
+  ngOnInit() {
     this.subscribeGetOrder();
+    this.orderService.watchAddVariant().subscribe(variant => {
+      this.addVariant(variant);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,7 +61,7 @@ export class PaymentComponent implements OnChanges {
   }
 
   addVariant(variant) {
-    
+    this.order.items.push(new OrderItem({variant}));
   }
 
 }
