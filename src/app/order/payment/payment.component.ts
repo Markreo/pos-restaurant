@@ -25,7 +25,15 @@ export class PaymentComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.subscribeGetOrder();
     this.orderService.watchAddVariant().subscribe(variant => {
-      this.addVariant(variant);
+      console.log('here');
+      const existing = this.getExistingVariants(variant);
+      if (existing.length) {
+        existing.forEach(existingItem => {
+          existingItem.quantity += 1;
+        });
+      } else {
+        this.addVariant(variant);
+      }
     });
   }
 
@@ -51,7 +59,6 @@ export class PaymentComponent implements OnInit, OnChanges {
         this.initNewOrder();
       }
     }, error => {
-      console.log('err', error);
       this.loadingOrder = false;
     });
   }
@@ -61,7 +68,19 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
   addVariant(variant) {
-    this.order.items.push(new OrderItem({variant}));
+    console.log('addVariant');
+    this.order.items.push(new OrderItem({
+      quantity: 1,
+      price: variant.sale_price,
+      variant,
+      discount: variant.discount ? variant.discount.discount : 0,
+      discount_type: variant.discount ? variant.discount.type : 'PERCENTAGE'
+    }));
+    console.log(this.order.items);
   }
 
+
+  getExistingVariants(variant): OrderItem[] {
+    return this.order.items.filter(item => item.variant.id === variant.id && !item.id && !item.is_voucher && !item.guest);
+  }
 }
