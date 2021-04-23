@@ -5,7 +5,6 @@ import {debounceTime, switchMap} from 'rxjs/operators';
 import {LocationEntity} from '../../_models/location.entity';
 import {Product} from '../../_models/product';
 import {IonSlides} from '@ionic/angular';
-import {Variant} from '../../_models/variant';
 
 @Component({
   selector: 'app-list-products',
@@ -14,6 +13,8 @@ import {Variant} from '../../_models/variant';
 })
 export class ListProductsComponent implements OnInit {
   @Input() location: LocationEntity;
+  @Output() slidesLength = new EventEmitter<number[]>();
+  @Output() slidesIndex = new EventEmitter<number>();
   filterObject = {
     start: 0,
     max: 12
@@ -59,6 +60,7 @@ export class ListProductsComponent implements OnInit {
   buildSlides() {
     const countPages = Math.ceil(this.total / this.filterObject.max);
     this.slides = Array(countPages - 1).fill(0).map((x, i) => i + 2);
+    this.emitSlide();
   }
 
   updateSearch() {
@@ -76,7 +78,16 @@ export class ListProductsComponent implements OnInit {
   onIonSlideDidChange(e) {
     this.slidesRef.getActiveIndex().then(index => {
       this.currentIndex = index;
+      this.emitCurrentIndex();
     });
   }
 
+  emitSlide() {
+    const a = Array(this.slides.length).fill(0).map((x, i) => i === this.currentIndex ? 1 : 0);
+    this.slidesLength.emit(a);
+  }
+
+  emitCurrentIndex() {
+    this.slidesIndex.emit(this.currentIndex);
+  }
 }

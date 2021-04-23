@@ -1,3 +1,20 @@
+@keyframes opacityOn {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 :host {
   ::ng-deep .item {
     position: relative;
@@ -7,6 +24,8 @@
     background: white;
     margin: 12.5px;
     border-radius: 11.25px;
+    animation: opacityOn 5s normal forwards;
+    animation-delay: 2s;
 
     &:hover{
       border: 2px solid #ffcb2a;

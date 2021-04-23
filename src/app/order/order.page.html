@@ -34,13 +34,12 @@
               <div class="category-item" *ngFor="let subCate of subCategories">{{subCate.name}}</div>
             </div>
             <div class="items" style="flex: 1; overflow: auto">
-              <app-list-products [location]="location"></app-list-products>
+              <app-list-products [location]="location" (slidesLength)="updatePagination($event)"
+                                 (slidesIndex)="currentIndex=$event"></app-list-products>
             </div>
-            <div class="items-pagination"
-                 style="display: flex; justify-content: center; align-items: center; padding: 15px">
-              <div style="height: 10px; width: 50px; background: #ffcb2a; border-radius: 20%; margin: 7.5px"></div>
-              <div style="height: 10px; width: 50px; background: #ffcb2a; border-radius: 20%; margin: 7.5px"></div>
-              <div style="height: 10px; width: 50px; background: #ffcb2a; border-radius: 20%; margin: 7.5px"></div>
+            <div class="items-pagination">
+              <div *ngFor="let page of slides; let i = index" [class.active]="i == currentIndex"
+                   class="item-pagination"></div>
             </div>
           </div>
 

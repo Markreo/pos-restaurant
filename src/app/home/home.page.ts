@@ -60,6 +60,7 @@ export class HomePage implements OnInit {
     this.presentLoading('Đang tải thông tin...');
     this.subscribeLoadLocation();
     this.subscribeTable();
+    this.ionViewDidEnter();
   }
 
   ionViewDidEnter() {

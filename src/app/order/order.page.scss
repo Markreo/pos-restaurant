@@ -33,8 +33,28 @@ ion-content {
   }
 }
 
-
 ion-searchbar {
   --background: transparent;
   --box-shadow: none;
+}
+
+
+.items-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+
+  .item-pagination {
+    &.active {
+      width: 50px;
+    }
+
+    transition: width 200ms ease-out;
+    height: 10px;
+    width: 10px;
+    background: #ffcb2a;
+    border-radius: 10px;
+    margin: 7.5px 0 7.5px 7.5px;
+  }
 }

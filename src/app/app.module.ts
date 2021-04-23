@@ -7,6 +7,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {TokenInterceptor} from './_interceptors/token.interceptor';
+import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 
 const interceptors = [
   {
@@ -20,7 +21,7 @@ const interceptors = [
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,],
-  providers: [interceptors, {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  providers: [interceptors, {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, ScreenOrientation],
   bootstrap: [AppComponent],
 })
 export class AppModule {

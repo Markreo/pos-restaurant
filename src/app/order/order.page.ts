@@ -30,6 +30,8 @@ export class OrderPage implements OnInit {
   };
 
 
+  slides = [];
+  currentIndex = 0
   constructor(private locationService: LocationService,
               private golfClubService: GolfClubService,
               private tableService: TableService,
@@ -69,5 +71,9 @@ export class OrderPage implements OnInit {
       this.parentCategories = categories.filter(cate => !cate.parent_id);
       this.subCategories = categories.filter(cate => !!cate.parent_id);
     });
+  }
+
+  updatePagination(slides) {
+    this.slides = slides;
   }
 }
