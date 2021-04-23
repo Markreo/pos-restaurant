@@ -12,13 +12,15 @@ import {ChildListProductsComponent} from './list-products/child-list-products/ch
 import {PaymentComponent} from './payment/payment.component';
 import {OrderItemComponent} from './payment/order-item/order-item.component';
 import {ProductItemComponent} from './list-products/product-item/product-item.component';
+import {SharedModule} from '../_helpers/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OrderPageRoutingModule
+    OrderPageRoutingModule,
+    SharedModule
   ],
   declarations: [OrderPage, ListProductsComponent, ChildListProductsComponent, PaymentComponent, OrderItemComponent, ProductItemComponent]
 })

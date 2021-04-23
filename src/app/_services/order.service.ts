@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {buildInventoryUrl} from '../_helpers/functions';
+import {buildInventoryUrl, convertDataToServer} from '../_helpers/functions';
 import {Subject} from 'rxjs';
 import {Variant} from '../_models/variant';
+import {Order} from '../_models/order';
 
 @Injectable({providedIn: 'root'})
 export class OrderService {
@@ -12,7 +13,7 @@ export class OrderService {
   }
 
   getOrder(golfClubId, tableId) {
-    return this.http.get(buildInventoryUrl('/golf/clubs/' + golfClubId) + '/orders?table=' + tableId);
+    return this.http.get<Order>(buildInventoryUrl('/golf/clubs/' + golfClubId) + '/orders?table=' + tableId);
   }
 
   triggerAddVariant(variant: Variant) {
@@ -21,5 +22,13 @@ export class OrderService {
 
   watchAddVariant() {
     return this.variantSubject.asObservable();
+  }
+
+  createOrder(golfClubId, data) {
+    return this.http.post<Order>(buildInventoryUrl('/golf/clubs/' + golfClubId) + '/orders', convertDataToServer(data));
+  }
+
+  updateOrder(golfClubId, orderId, data) {
+    return this.http.put<Order>(buildInventoryUrl('/golf/clubs/' + golfClubId) + '/orders/' + orderId, convertDataToServer(data));
   }
 }

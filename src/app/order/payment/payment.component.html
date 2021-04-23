@@ -1,9 +1,9 @@
 <div class="payment-content">
-  <div *ngIf="loadingOrder" style="flex: 1; display: flex; justify-content: center; align-items: center">
+  <div *ngIf="loading === 'loadingOrder'" style="flex: 1; display: flex; justify-content: center; align-items: center">
     <ion-spinner></ion-spinner>
     Loading....
   </div>
-  <div *ngIf="!loadingOrder">
+  <div *ngIf="!loading">
     <div
       style="; margin: 22.5px 10px;border-radius: 11.25px; background: #e6e6e6; display: flex; justify-content: space-between; padding: 5px 10px">
       <div>NT RSVT <span class="ion-color-danger">#125</span></div>
@@ -19,13 +19,13 @@
       <div class="item-price">Price</div>
     </div>
   </div>
-  <div *ngIf="!loadingOrder" style="flex: 1; padding: 10px; overflow: auto">
+  <div *ngIf="!loading" style="flex: 1; padding: 10px; overflow: auto">
     <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
   </div>
   <div style="padding: 22.5px; ">
-    <ion-button
+    <ion-button (click)="submitOrder()"
       class="submit-btn"
-      [disabled]="loadingOrder">
+      [disabled]="loading">
       SUBMIT ORDER
     </ion-button>
   </div>
