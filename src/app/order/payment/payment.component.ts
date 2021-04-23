@@ -6,7 +6,7 @@ import {debounceTime, filter, switchMap} from 'rxjs/operators';
 import {GolfClubEntity} from '../../_models/golf-club.entity';
 import {Order} from '../../_models/order';
 import {OrderItem} from '../../_models/order-item';
-import {LoadingController, ToastController} from '@ionic/angular';
+import {ActionSheetController, LoadingController, ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-payment',
@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit, OnChanges {
   order: Order;
 
   constructor(private orderService: OrderService, private loadingControl: LoadingController,
-              private toastController: ToastController) {
+              private toastController: ToastController, public actionSheetController: ActionSheetController) {
   }
 
   ngOnInit() {
@@ -134,4 +134,30 @@ export class PaymentComponent implements OnInit, OnChanges {
     toast.present();
   }
 
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [
+        {
+          text: 'Submit Order',
+          handler: () => {
+            this.submitOrder();
+          }
+        },
+        {
+          text: 'Checkout Order',
+          handler: () => {
+            console.log('Delete clicked');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
 }
