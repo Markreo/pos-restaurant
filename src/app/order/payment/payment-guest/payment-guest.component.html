@@ -2,6 +2,6 @@
   <div>NT RSVT <span class="ion-color-danger">#125</span></div>
   <span (click)="removeGuest()">X</span>
 </div>
-<div class="bound" *ngIf="!guest">
+<div class="bound" *ngIf="!guest" (click)="scanBarcode()">
   Scan Bagtags
 </div>

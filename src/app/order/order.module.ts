@@ -11,6 +11,7 @@ import {OrderItemComponent} from './payment/order-item/order-item.component';
 import {ProductItemComponent} from './list-products/product-item/product-item.component';
 import {SharedModule} from '../_helpers/shared/shared.module';
 import {PaymentGuestComponent} from './payment/payment-guest/payment-guest.component';
+import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -18,8 +19,9 @@ import {PaymentGuestComponent} from './payment/payment-guest/payment-guest.compo
     FormsModule,
     IonicModule,
     OrderPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
+  providers: [BarcodeScanner],
   declarations: [OrderPage,
     ListProductsComponent,
     ChildListProductsComponent,
