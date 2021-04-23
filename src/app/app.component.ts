@@ -11,8 +11,15 @@ export class AppComponent {
   constructor(private screenOrientation: ScreenOrientation, public platform: Platform) {
     if (this.platform.is('cordova')) {
       this.platform.ready().then(() => {
+        console.log('lockkkkkk')
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
       });
     }
+
+    this.screenOrientation.onChange().subscribe(
+      () => {
+        console.log('Orientation Changed');
+      }
+    );
   }
 }

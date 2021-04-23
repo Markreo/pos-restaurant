@@ -1,15 +1,15 @@
 @keyframes opacityOn {
   0% {
-    opacity: 1;
+    opacity: 0;
   }
   25% {
-    opacity: 0;
+    opacity: 0.25;
   }
   50% {
-    opacity: 1;
+    opacity: 0.5;
   }
   75% {
-    opacity: 0;
+    opacity: 0.75;
   }
   100% {
     opacity: 1;
@@ -24,8 +24,7 @@
     background: white;
     margin: 12.5px;
     border-radius: 11.25px;
-    animation: opacityOn 5s normal forwards;
-    animation-delay: 2s;
+    animation: opacityOn 300ms ease-in;
 
     &:hover{
       border: 2px solid #ffcb2a;
