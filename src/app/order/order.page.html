@@ -5,17 +5,19 @@
         style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
         <div class="logo" style="height: 100px; background:#184a7b">
         </div>
-        <div class="menu" style="flex: 1; overflow: auto">
-          <div class="menu-item" *ngFor="let cate of parentCategories">
-            <img src="http://placehold.it/100"/>
-            {{cate.name}}
+        <div class="menu">
+          <div class="menu-item" [class.active]="currentMenu?.id === cate.id"
+               (click)="selectMenu(cate)"
+               *ngFor="let cate of parentCategories; let i = index">
+            <img src="/assets/icon/drink.png"/>
+            <div> {{cate.name}}</div>
           </div>
         </div>
       </div>
       <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; background: #eeedf3">
-        <div class="header" style="height: 100px; display: flex; padding: 22.5px">
+        <div class="header" style="height: 120px; display: flex; padding: 22.5px">
           <div class="search"
-               style="background: white; flex: 1; border-radius: 22.5px; display: flex; align-items: center; padding: 10px 22.5px">
+               style="background: white; flex: 1; border-radius: 35px; display: flex; align-items: center; padding: 10px 22.5px">
             <div style="border-right: 2px solid black; padding-right: 10px; white-space: nowrap">
               Food & Beverages
             </div>

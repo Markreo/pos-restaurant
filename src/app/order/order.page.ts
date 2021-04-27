@@ -31,7 +31,11 @@ export class OrderPage implements OnInit {
 
 
   slides = [];
-  currentIndex = 0
+  currentIndex = 0;
+
+
+  currentMenu;
+
   constructor(private locationService: LocationService,
               private golfClubService: GolfClubService,
               private tableService: TableService,
@@ -70,7 +74,14 @@ export class OrderPage implements OnInit {
       this.rawCategories = categories;
       this.parentCategories = categories.filter(cate => !cate.parent_id);
       this.subCategories = categories.filter(cate => !!cate.parent_id);
+      if (!this.currentMenu && this.parentCategories.length) {
+        this.currentMenu = this.parentCategories[0];
+      }
     });
+  }
+
+  selectMenu(menu) {
+    this.currentMenu = menu
   }
 
   updatePagination(slides) {
