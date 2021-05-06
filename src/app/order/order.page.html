@@ -5,13 +5,23 @@
         style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
         <div class="logo" style="height: 100px; background:#184a7b">
         </div>
-        <div class="menu">
-          <div class="menu-item" [class.active]="currentMenu?.id === cate.id"
-               (click)="selectMenu(cate)"
-               *ngFor="let cate of parentCategories; let i = index">
-            <img src="/assets/icon/drink.png"/>
-            <div> {{cate.name}}</div>
-          </div>
+        <div class="menu" *ngIf="location">
+          <ng-container *ngIf="!location.enable_menu">
+            <div class="menu-item" [class.active]="currentMenu?.id === cate.id"
+                 (click)="selectParentCategory(cate)"
+                 *ngFor="let cate of parentCategories; let i = index">
+              <img src="/assets/icon/drink.png"/>
+              <div> {{cate.name}}</div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="location.enable_menu">
+            <div class="menu-item" [class.active]="currentMenu?.id === menu.id"
+                 (click)="selectMenu(menu)"
+                 *ngFor="let menu of menus; let i = index">
+              <img src="/assets/icon/drink.png"/>
+              <div> {{menu.name}}</div>
+            </div>
+          </ng-container>
         </div>
       </div>
       <div style="flex: 1; display: flex; flex-direction: column; min-width: 0; background: #eeedf3">
