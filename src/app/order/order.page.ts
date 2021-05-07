@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LocationEntity} from '../_models/location.entity';
 import {LocationService} from '../_services/location.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -12,7 +12,7 @@ import {GolfClubEntity} from '../_models/golf-club.entity';
 import {Menu} from '../_models/menu';
 import {MenuService} from '../_services/menu.service';
 import {Category} from '../_models/category';
-import {isCombinedNodeFlagSet} from 'tslint';
+import {ListProductsComponent} from './list-products/list-products.component';
 
 @Component({
   selector: 'app-order',
@@ -40,7 +40,10 @@ export class OrderPage implements OnInit {
 
 
   currentMenu: Category | Menu;
+  currentSubCate: Category;
   subMenuSubject = new Subject<{ type: 'category' | 'menu', object: any }>();
+
+  @ViewChild(ListProductsComponent, {static: true}) listProductRef: ListProductsComponent;
 
   constructor(private locationService: LocationService,
               private golfClubService: GolfClubService,
@@ -57,6 +60,7 @@ export class OrderPage implements OnInit {
         take(1)
       )
       .subscribe(([params, location, golf]) => {
+        location.enable_menu = false; // hardcode
         if (location && golf) {
           this.golfClub = golf;
           this.location = location;
@@ -101,7 +105,6 @@ export class OrderPage implements OnInit {
   }
 
   updateSubCategory() {
-    console.log('next');
     this.subMenuSubject.next({type: this.location.enable_menu ? 'menu' : 'category', object: this.currentMenu});
   }
 
@@ -133,14 +136,40 @@ export class OrderPage implements OnInit {
     });
   }
 
+  /*level 1 */
+
   selectParentCategory(menu) {
     this.currentMenu = menu;
+    this.currentSubCate = null;
     this.updateSubCategory();
+    this.listProductRef.updateFilter({category: menu.id});
   }
 
   selectMenu(menu: Menu) {
     this.currentMenu = menu;
     this.updateSubCategory();
+  }
+
+  /*level 2 */
+  selectSubCategory(category: Category) {
+    this.currentSubCate = category;
+    if (category) {
+      if (this.location.enable_menu) {
+        this.listProductRef.updateFilter({category: category.id});
+      } else {
+        this.listProductRef.updateFilter({category: category.id});
+      }
+    } else {
+      if (this.currentMenu) {
+        if (this.location.enable_menu) {
+          this.listProductRef.updateFilter({menu: this.currentMenu.id});
+        } else {
+          this.listProductRef.updateFilter({category: this.currentMenu.id});
+        }
+      } else {
+        this.listProductRef.updateFilter({});
+      }
+    }
   }
 
   updatePagination(slides) {

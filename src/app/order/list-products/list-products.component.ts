@@ -16,8 +16,8 @@ export class ListProductsComponent implements OnInit {
   @Output() slidesLength = new EventEmitter<number[]>();
   @Output() slidesIndex = new EventEmitter<number>();
   filterObject = {
-    start: 0,
-    max: 12
+    max: 12,
+    type: 'STORE'
   };
   productSubject = new Subject();
   total = 0;
@@ -34,11 +34,11 @@ export class ListProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProduct();
-    this.productSubject.next(this.filterObject);
+    this.subscribeProducts();
+    this.updateData();
   }
 
-  loadProduct() {
+  subscribeProducts() {
     this.productSubject.pipe(
       debounceTime(300),
       switchMap(filter => {
@@ -58,21 +58,21 @@ export class ListProductsComponent implements OnInit {
 
 
   buildSlides() {
-    const countPages = Math.ceil(this.total / this.filterObject.max);
-    this.slides = Array(countPages - 1).fill(0).map((x, i) => i + 2);
-    this.emitSlide();
+    if (this.total) {
+      const countPages = Math.ceil(this.total / this.filterObject.max);
+      this.slides = Array(countPages - 1).fill(0).map((x, i) => i + 2);
+      this.emitSlide();
+    }
   }
 
-  updateSearch() {
-
+  updateFilter(filter) {
+    this.filterObject = {...this.filterObject, ...filter};
+    this.updateData();
   }
 
-  updateMenu() {
-
-  }
-
-  updateCategory() {
-
+  updateData() {
+    this.loading = true;
+    this.productSubject.next(this.filterObject); // todo: reset page
   }
 
   onIonSlideDidChange(e) {

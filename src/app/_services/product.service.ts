@@ -11,8 +11,14 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  getAllWithFilter(locationId, filter) {
-    return this.http.get<{ total: number, data: Product[] }>(buildInventoryUrl('stores/' + locationId + '/products') + `?start=${filter.start}&max=${filter.max}`);
+  getAllWithFilter(locationId, filter: any = {}) {
+    const query = Object.keys(filter).reduce((qry, key) => {
+      if (filter[key]) {
+        qry += '&' + key + '=' + filter[key];
+      }
+      return qry;
+    }, '');
+    return this.http.get<{ total: number, data: Product[] }>(buildInventoryUrl('stores/' + locationId + '/products') + `?` + query);
   }
 
   getVariants(productId): Observable<Variant[]> {
