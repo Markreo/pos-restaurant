@@ -30,8 +30,9 @@ export class OrderPage implements OnInit {
   menus: Menu[] = [];
 
   table: Table;
-  filter = {
-    category: null
+  filter: { menu?, category?, search? } = {
+    category: null,
+    search: ''
   };
 
 
@@ -60,7 +61,6 @@ export class OrderPage implements OnInit {
         take(1)
       )
       .subscribe(([params, location, golf]) => {
-        location.enable_menu = false; // hardcode
         if (location && golf) {
           this.golfClub = golf;
           this.location = location;
@@ -142,12 +142,17 @@ export class OrderPage implements OnInit {
     this.currentMenu = menu;
     this.currentSubCate = null;
     this.updateSubCategory();
-    this.listProductRef.updateFilter({category: menu.id});
+    this.filter.menu = null;
+    this.filter.category = menu.id;
+    this.listProductRef.updateFilter(this.filter);
   }
 
   selectMenu(menu: Menu) {
     this.currentMenu = menu;
     this.updateSubCategory();
+    this.filter.category = null;
+    this.filter.menu = menu.id;
+    this.listProductRef.updateFilter(this.filter);
   }
 
   /*level 2 */
@@ -155,21 +160,35 @@ export class OrderPage implements OnInit {
     this.currentSubCate = category;
     if (category) {
       if (this.location.enable_menu) {
-        this.listProductRef.updateFilter({category: category.id});
+        this.filter.category = category.id;
+        if (this.currentMenu) {
+          this.filter.menu = this.currentMenu.id;
+        } else {
+          this.filter.menu = null; // this should not work
+        }
       } else {
-        this.listProductRef.updateFilter({category: category.id});
+        this.filter.menu = null;
+        this.filter.category = category.id;
       }
     } else {
       if (this.currentMenu) {
         if (this.location.enable_menu) {
-          this.listProductRef.updateFilter({menu: this.currentMenu.id});
+          this.filter.menu = this.currentMenu.id;
+          this.filter.category = null;
         } else {
-          this.listProductRef.updateFilter({category: this.currentMenu.id});
+          this.filter.menu = null;
+          this.filter.category = this.currentMenu.id;
         }
       } else {
-        this.listProductRef.updateFilter({});
+        this.filter.category = null;
+        this.filter.menu = null;
       }
     }
+    this.listProductRef.updateFilter(this.filter);
+  }
+
+  updateSearch() {
+    this.listProductRef.updateFilter(this.filter);
   }
 
   updatePagination(slides) {
