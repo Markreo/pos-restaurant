@@ -4,7 +4,7 @@
     Loading....
   </div>
   <div *ngIf="!loading">
-    <app-payment-guest [guest]="order.guest"></app-payment-guest>
+    <app-payment-guest [guest]="order.guest" (guestChange)="setGuest($event)" [golfClub]="golfClub"></app-payment-guest>
     <div
       style="border-bottom: 1px; display: flex; padding-bottom: 5px ; border-bottom: 1px solid #518ac6; margin: 10px">
       <div class="item-bagtag"></div>

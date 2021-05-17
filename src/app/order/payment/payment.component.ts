@@ -7,6 +7,7 @@ import {GolfClubEntity} from '../../_models/golf-club.entity';
 import {Order} from '../../_models/order';
 import {OrderItem} from '../../_models/order-item';
 import {ActionSheetController, LoadingController, ToastController} from '@ionic/angular';
+import {Guest} from '../../_models/guest';
 
 @Component({
   selector: 'app-payment',
@@ -71,7 +72,6 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
   addVariant(variant) {
-    console.log('addVariant');
     this.order.items.push(new OrderItem({
       quantity: 1,
       price: variant.sale_price,
@@ -79,7 +79,6 @@ export class PaymentComponent implements OnInit, OnChanges {
       discount: variant.discount ? variant.discount.discount : 0,
       discount_type: variant.discount ? variant.discount.type : 'PERCENTAGE'
     }));
-    console.log(this.order.items);
   }
 
 
@@ -159,5 +158,9 @@ export class PaymentComponent implements OnInit, OnChanges {
       ]
     });
     await actionSheet.present();
+  }
+
+  setGuest(guest: Guest) {
+    this.order.guest = guest;
   }
 }

@@ -91,7 +91,6 @@ export class OrderPage implements OnInit {
             return of(this.rawCategories.filter(cate => !!cate.parent_id));
           }
         } else {
-          console.log('here', filter);
           if (filter.object) {
             return this.getCategoryFormMenu(filter.object.id);
           } else {

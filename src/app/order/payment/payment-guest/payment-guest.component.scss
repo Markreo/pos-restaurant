@@ -1,10 +1,46 @@
 .bound {
   margin: 22.5px 10px;
-  border-radius: 11.25px;
-  background: #e6e6e6;
+  border-radius: 22.5px;
   display: flex;
   justify-content: space-between;
-  padding: 5px 10px;
-  height: 25px;
+  padding: 10px 20px;
   cursor: pointer;
+  border: 1px solid #cbcbcb;
+
+  &.bg-gray {
+    background: #e6e6e6;
+  }
+}
+
+ion-input {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: white;
+}
+
+ion-icon.search {
+  font-size: 16px;
+}
+
+ion-icon.close-result {
+  position: absolute;
+  right: 25px;
+  font-size: 16px;
+  z-index: 5;
+}
+
+ion-icon.scan {
+  position: absolute;
+  right: 25px;
+  font-size: 16px;
+  z-index: 5;
+}
+
+
+.CHECKOUT {
+  color: #2ecdee;
+}
+
+.CHECKIN {
+  color: #ff5a5a;
 }

@@ -1,7 +1,53 @@
-<div class="bound" *ngIf="guest">
-  <div>NT RSVT <span class="ion-color-danger">#125</span></div>
-  <span (click)="removeGuest()">X</span>
+<div class="bound bg-gray" *ngIf="guest">
+  <div>{{guest.fullname}}<span class="ion-color-danger">#{{guest.bagtag}}</span></div>
+  <ion-icon class="search" name="close-outline" (click)="removeGuest()"></ion-icon>
 </div>
-<div class="bound" *ngIf="!guest" (click)="scanBarcode()">
-  Scan Bagtags
+<ng-container *ngIf="!guest">
+  <div class="bound">
+    <ion-icon *ngIf="searchStr" class="close-result" name="close-circle-outline"
+              (click)="searchStr = ''; showResult = false;"></ion-icon>
+    <ion-icon *ngIf="!searchStr" class="scan" name="camera"
+              (click)="scanBarcode()"></ion-icon>
+    <ion-input placeholder="Bagtags" [(ngModel)]="searchStr" (ngModelChange)="update()"
+               (ionFocus)="handleFocus($event)"></ion-input>
+  </div>
+</ng-container>
+<div *ngIf="showResult"
+     style="position: absolute; width: 100%; height: calc(100% - 87px); background: white; z-index: 9; overflow: auto">
+  <div *ngIf="loading">
+    <ion-list>
+      <ion-list-header>
+        <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+      </ion-list-header>
+      <ion-item>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-item>
+
+    </ion-list>
+  </div>
+  <div *ngIf="!loading" style="flex: 1; overflow: auto">
+    <ion-list style="padding-top: 0" *ngIf="guests.length">
+      <ion-list-header>
+        <ion-label>List guest:</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let guest of guests" (click)="onClickGuest(guest)" [disabled]="guest.status === 'CHECKOUT'">
+        <ion-label><span [class]="guest.status">#{{guest.bagtag}}</span> {{guest.fullname}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding" *ngIf="guests.length === 0">
+      <i>Guest not found!</i>
+    </div>
+  </div>
 </div>
