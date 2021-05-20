@@ -6,7 +6,7 @@ import {debounceTime, filter, switchMap} from 'rxjs/operators';
 import {GolfClubEntity} from '../../_models/golf-club.entity';
 import {Order} from '../../_models/order';
 import {OrderItem} from '../../_models/order-item';
-import {ActionSheetController, LoadingController, ToastController} from '@ionic/angular';
+import {ActionSheetController, AlertController, LoadingController, ToastController} from '@ionic/angular';
 import {Guest} from '../../_models/guest';
 
 @Component({
@@ -21,8 +21,11 @@ export class PaymentComponent implements OnInit, OnChanges {
   loading = 'loadingOrder';
   order: Order;
 
-  constructor(private orderService: OrderService, private loadingControl: LoadingController,
-              private toastController: ToastController, public actionSheetController: ActionSheetController) {
+  constructor(private orderService: OrderService,
+              private loadingControl: LoadingController,
+              private toastController: ToastController,
+              private alertController: AlertController,
+              private actionSheetController: ActionSheetController) {
   }
 
   ngOnInit() {
@@ -97,6 +100,45 @@ export class PaymentComponent implements OnInit, OnChanges {
     }
   }
 
+  async checkoutOrder() {
+    if (!this.checkGuestValidator()) {
+      await this.presentAlert('Guest cannot be null!');
+      return;
+    }
+
+    const {role} = await this.presentAlert('Do you want to checkout?', [{text: 'Cancel', role: 'Cancel'}, {text: 'OK', role: 'OK'}]);
+    if (role === 'OK') {
+      const loading = await this.presentLoading();
+      this.orderService.checkout(this.order.id, {
+        lang: 'en',
+        items: this.order.items.map(item => {
+          return {
+            id: item.id,
+            variant: item.variant ? item.variant.id : null,
+            quantity: item.quantity,
+            price: item.price
+          };
+        })
+      }).subscribe(order => {
+        this.presentToast('primary', 'Checkout success!');
+        this.initNewOrder();
+        loading.dismiss();
+      }, error => {
+        loading.dismiss();
+      });
+    }
+  }
+
+  async presentAlert(message, btns: any[] = ['OK']) {
+    const alert = await this.alertController.create({
+      message,
+      buttons: btns
+    });
+    await alert.present();
+    return await alert.onDidDismiss();
+  }
+
+
   onSubmitOrderSuccess = (loading: HTMLIonLoadingElement) => {
     return (order: Order) => {
       this.order = order;
@@ -134,33 +176,52 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
   async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      buttons: [
-        {
-          text: 'Submit Order',
-          handler: () => {
-            this.submitOrder();
+    if (this.order.id) {
+      const actionSheet = await this.actionSheetController.create({
+        buttons: [
+          {
+            text: 'Update Order',
+            handler: () => {
+              this.submitOrder();
+            }
+          },
+          {
+            text: 'Checkout Order',
+            handler: () => {
+              this.checkoutOrder();
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
           }
-        },
-        {
-          text: 'Checkout Order',
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    await actionSheet.present();
+        ]
+      });
+      await actionSheet.present();
+    } else {
+      await this.submitOrder();
+    }
+
   }
 
   setGuest(guest: Guest) {
     this.order.guest = guest;
+  }
+
+  checkGuestValidator(): boolean {
+    // if (this.paymentMethod === 'CASH') {
+    //   return true;
+    // }
+    console.log(this.order);
+    const itemWithoutBagtag = this.order.items.find(item => !item.guest);
+    console.log('itemWithoutBagtag', itemWithoutBagtag);
+    if (itemWithoutBagtag) {
+      return !!this.order.guest;
+    } else {
+      return true;
+    }
   }
 }

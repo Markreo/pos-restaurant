@@ -4,7 +4,6 @@
 }
 
 .payment-content {
-  font-size: 80%;
   background: white;
   height: 100%;
   display: flex;
@@ -23,7 +22,8 @@
 
     .order-item {
       display: flex;
-      margin-bottom: 10px;
+      padding-bottom: 10px;
+      padding-top: 10px;
     }
 
     .item-name {
