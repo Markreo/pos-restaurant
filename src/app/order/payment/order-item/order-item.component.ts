@@ -46,7 +46,10 @@ export class OrderItemComponent implements OnInit {
   async presentModal() {
     const modal = await this.modalController.create({
       component: OrderItemDetailComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'my-custom-class',
+      componentProps: {
+        item: {...this.item}
+      }
     });
     return await modal.present();
   }

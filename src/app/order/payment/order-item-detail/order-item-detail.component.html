@@ -1,0 +1,49 @@
+<div style="display: flex; height: 100%; width: 100%; padding: 1rem; overflow: hidden" *ngIf="item">
+  <div>
+    <img [src]="item.variant.image || 'http://placehold.it/380'" alt="" style="height: 100%">
+  </div>
+  <div style="flex: 1; margin-left: 2rem; display: flex; flex-direction: column">
+    <div>
+      <h2 style="margin-top: 0; margin-bottom: 1rem">Name: <strong>{{item.variant.name}}</strong></h2>
+    </div>
+    <div style="display: flex; flex: 1; min-height: 0">
+      <div style="flex: 1; display: flex; flex-direction: column">
+        <p style="margin-top: 0">Price: <input
+          style="margin-left: 1rem; height: 2.5rem; border:1px solid #dee2e6 !important; padding-left: 10px; padding-right: 10px"
+          type="number" [value]="item.variant.formatted_price_after_discount"></p>
+        <div style="margin-bottom: 1rem;display: flex; align-items: center">
+          Quantity:
+          <ion-icon class="ion-padding" name="remove-outline" (click)="decrease()"></ion-icon>
+          <div
+            style="border: 2px solid #dee2e6; display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem">
+            {{item.quantity}}
+          </div>
+          <ion-icon class="ion-padding" name="add-outline" (click)="increase()"></ion-icon>
+        </div>
+        <div style="margin-bottom: 1rem;display: flex; min-height: 0">
+          <div>
+            Description:
+          </div>
+          <div style="margin-left: 1rem; overflow: auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Maecenas laoreet elit
+            id mi cursus rutrum.
+            Sed lacus urna, sollicitudin ut bibendum quis, pulvinar vitae ex. Curabitur finibus mi tellus, eu suscipit
+            nisi
+            semper sed.
+            Phasellus pharetra, felis id congue tristique, ipsum ante egestas dolor, vitae ultrices orci massa at velit.
+            Etiam vitae arcu sodales, pharetra leo vel, interdum lacus. Integer erat nulla, imperdiet nec dictum vel,
+            dignissim vitae quam
+          </div>
+        </div>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between">
+        <div>
+        </div>
+        <div class="ion-text-right">
+          <ion-button color="primary">Save</ion-button>
+          <ion-button color="danger">Remove</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
