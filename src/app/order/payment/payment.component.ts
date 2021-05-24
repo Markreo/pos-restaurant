@@ -90,13 +90,20 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
   async submitOrder() {
-    const loading = await this.presentLoading();
-    if (this.order.id) {
-      this.orderService.updateOrder(this.golfClub.id, this.order.id, this.order)
-        .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitOrderSuccess(loading));
-    } else {
-      this.orderService.createOrder(this.golfClub.id, this.order)
-        .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitOrderSuccess(loading));
+    const {role} = await this.presentAlert(`Do you want to ${this.order.id ? 'Update' : 'Submit'} order?`,
+      [
+        {text: 'Cancel', role: 'Cancel'},
+        {text: 'OK', role: 'OK'}
+      ]);
+    if (role === 'OK') {
+      const loading = await this.presentLoading();
+      if (this.order.id) {
+        this.orderService.updateOrder(this.golfClub.id, this.order.id, this.order)
+          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitOrderSuccess(loading));
+      } else {
+        this.orderService.createOrder(this.golfClub.id, this.order)
+          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitOrderSuccess(loading));
+      }
     }
   }
 

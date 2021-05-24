@@ -13,6 +13,7 @@ import {SharedModule} from '../_helpers/shared/shared.module';
 import {PaymentGuestComponent} from './payment/payment-guest/payment-guest.component';
 import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
 import {ListGuestComponent} from './payment/payment-guest/list-guest/list-guest.component';
+import {OrderItemDetailComponent} from './payment/order-item-detail/order-item-detail.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {ListGuestComponent} from './payment/payment-guest/list-guest/list-guest.
   providers: [BarcodeScanner],
   declarations: [OrderPage,
     ListProductsComponent,
+    OrderItemDetailComponent,
     ListGuestComponent,
     ChildListProductsComponent,
     PaymentComponent,

@@ -7,7 +7,8 @@
     <strong>{{item.variant.name}}</strong>
   </div>
   <div class="item-qty">
-    {{item.quantity}}
+    <ion-button *ngIf="!item.id" color="medium" size="small" (click)="presentModal()">{{item.quantity}}</ion-button>
+    <ng-container *ngIf="item.id">{{item.quantity}}</ng-container>
   </div>
   <div class="item-price">
     {{item.price | formatCurrency}}
