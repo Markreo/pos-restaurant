@@ -24,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
   },
   {
-    path: 'setting',
-    loadChildren: () => import('./select-location/select-location.module').then( m => m.SelectLocationPageModule)
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
 ];
 
