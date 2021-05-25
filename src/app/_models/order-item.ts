@@ -14,6 +14,7 @@ export class OrderItem {
   guest: Guest
   discount;
   discount_type;
+  description: string
 
   constructor(entity: Partial<OrderItem> = {}) {
     this.id = entity.id;
@@ -26,6 +27,7 @@ export class OrderItem {
     this.grand_total = entity.grand_total;
     this.guest = entity.guest;
     this.discount = entity.discount;
-    this.discount_type = entity.discount_type
+    this.discount_type = entity.discount_type;
+    this.description = entity.description;
   }
 }
