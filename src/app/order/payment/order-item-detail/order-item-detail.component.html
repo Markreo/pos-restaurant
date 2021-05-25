@@ -1,3 +1,4 @@
+<!--todo: dùng grid thay vì flex-->
 <div style="display: flex; height: 100%; width: 100%; padding: 1rem; overflow: hidden" *ngIf="item">
   <div>
     <img [src]="item.variant.image || 'http://placehold.it/380'" alt="" style="height: 268px; width: 268px">
@@ -8,35 +9,38 @@
     </div>
     <div style="display: flex; flex: 1; min-height: 0">
       <div style="flex: 1; display: flex; flex-direction: column">
-        <p style="margin-top: 0">Price:
+        <div style="margin-bottom: 1rem; display: flex; align-items: center">
+
+          <div class="my-label">Price:</div>
           <input placeholder="Price" #inputPrice
                  (focus)="markFocus('inputPrice')"
-                 style="margin-left: 1rem; height: 2.5rem; border:1px solid #dee2e6 !important; border-radius: 0 !important; padding-left: 10px; padding-right: 10px"
-                 type="number" [(ngModel)]="item.variant.price_after_discount"></p>
+                 style="flex: 1;height: 2.5rem; border:2px solid #dee2e6 !important; border-radius: 0 !important; padding-left: 10px; padding-right: 10px"
+                 type="number" [(ngModel)]="item.variant.price_after_discount">
+        </div>
         <div style="margin-bottom: 1rem;display: flex; align-items: center">
-          Quantity:
+          <div class="my-label">Quantity:</div>
           <ion-icon class="ion-padding" name="remove-outline" (click)="decrease($event)"></ion-icon>
           <input #inputQty [(ngModel)]="item.quantity" (focus)="markFocus('inputQty')"
-                 style="border: 2px solid #dee2e6; display: flex; width: 3rem; height: 2.5rem; text-align: center">
+                 style="margin: 0 1rem;border: 2px solid #dee2e6; display: flex; width: 3rem; height: 2.5rem; text-align: center;border-radius: 0 !important; ">
 
           <ion-icon class="ion-padding" name="add-outline" (click)="increase($event)"></ion-icon>
         </div>
         <div
-          style="margin-bottom: 1rem;display: flex; min-height: 0; align-items: stretch; flex: 1; ">
-          <div>
+          style="margin-bottom: 1rem;display: flex; min-height: 0; align-items: stretch; flex: 1;">
+          <div class="my-label">
             Description:
           </div>
           <textarea #inputDescription [(ngModel)]="item.description" placeholder="Description"
                     (focus)="markFocus('inputDescription')"
-                    style="width: 100%; margin-left: 1rem; height: 100%; border: 1px solid #dee2e6"></textarea>
+                    style="flex: 1;; height: 100%; border: 2px solid #dee2e6; border-radius: 0 !important; "></textarea>
         </div>
       </div>
       <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; margin-left: 1rem">
         <div>
           <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">
-            Discount:
+            <div class="my-label">Discount:</div>
             <input #inputDiscountType [(ngModel)]="item.discount" (focus)="markFocus('inputDiscountType')"
-                   style="border: 2px solid #dee2e6; margin-left: 1rem; width: 6rem; height: 2.5rem; text-align: center">
+                   style="flex:1 ;border: 2px solid #dee2e6; width: 6rem; height: 2.5rem; text-align: left; border-radius: 0 !important; padding-left: 1rem">
             <div>
               <div (click)="toggleDiscountType($event)"
                    style="border: 2px solid #dee2e6; border-left: 0;  display: flex; align-items: center; justify-content: center; width: 3rem; height: 2.5rem;  ">
@@ -46,11 +50,38 @@
             </div>
           </div>
 
-          <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem">Guest:
-            <span class="ion-color-danger">#107</span> MR. Chang Wook
+          <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">
+            <div class="my-label">
+              Guest:
+            </div>
+            <input *ngIf="!item.guest"
+                   #inputBagtag
+                   (focus)="markFocus('inputBagtag')"
+                   [(ngModel)]="keyBagtag"
+                   style="flex: 1;border: 2px solid #dee2e6; height: 2.5rem; text-align: left; border-radius: 0 !important; padding-left: 1rem ">
+            <div *ngIf="item.guest"
+                 style="flex: 1;display: flex; align-items: center; padding-left: 1rem;
+                 ;border: 2px solid #dee2e6; height: 2.5rem; text-align: left; border-radius: 0 !important; width: 100%">
+              <span
+                style="color: #ff858b; margin-right: 0.25rem">#{{item.guest.bagtag}}</span> {{item.guest.customer || item.guest.fullname}}
+            </div>
+            <div *ngIf="!item.guest"
+                 style="border: 2px solid #dee2e6; border-left: 0;  display: flex; align-items: center; justify-content: center; width: 3rem; height: 2.5rem;"
+                 (click)="applyBagtag($event)">
+              <ion-icon *ngIf="!loadingGuest" name="search-outline"></ion-icon>
+              <ion-spinner *ngIf="loadingGuest"></ion-spinner>
+            </div>
+            <div *ngIf="item.guest"
+                 style="border: 2px solid #dee2e6; border-left: 0;  display: flex; align-items: center; justify-content: center; width: 3rem; height: 2.5rem;"
+                 (click)="removeGuest()">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
           </div>
-          <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">Voucher:
-            <div style="margin-left: 1rem">
+          <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">
+            <div class="my-label">
+              Voucher:
+            </div>
+            <div style="flex: 1">
               <i *ngIf="item.is_voucher">Voucher applied</i>
               <ion-button *ngIf="!item.is_voucher" color="light" (click)="markApplyVoucher()"> Apply voucher
               </ion-button>
@@ -58,7 +89,7 @@
           </div>
         </div>
         <div class="ion-text-right">
-          <ion-button color="danger" fill="outline">
+          <ion-button color="danger" fill="outline" *ngIf="!item.id">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
           <ion-button color="primary">Save</ion-button>

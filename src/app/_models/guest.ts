@@ -3,4 +3,5 @@ export class Guest {
   fullname;
   bagtag;
   status;
+  customer;
 }
