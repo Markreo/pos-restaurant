@@ -1,4 +1,5 @@
-<div class="item" [class.loading]="loading" (click)="onClickProduct()">
+<div class="item" [class.loading]="loading" (click)="onClickProduct()"
+     [ngStyle]="{width: size.itemWidth + 'px', height: size.itemHeight + 'px'}">
   <ion-img [src]="product.image ? product.image : 'http://placehold.it/380'"></ion-img>
   <div style="position: absolute; bottom: 0; padding: 10px; width: 100%; background: white">
     <strong>{{product.name}}</strong>

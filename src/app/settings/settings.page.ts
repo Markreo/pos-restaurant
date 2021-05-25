@@ -11,7 +11,7 @@ import {ToastController} from '@ionic/angular';
 })
 export class SettingsPage implements OnInit {
   form = new FormGroup({
-    itemPerSlide: new FormControl(0, Validators.required),
+    itemPerSlide: new FormControl(0, [Validators.required, Validators.min(1)]),
     itemWidth: new FormControl(0, Validators.required),
     itemHeight: new FormControl(0, Validators.required),
   });

@@ -5,6 +5,7 @@ import {debounceTime, switchMap} from 'rxjs/operators';
 import {LocationEntity} from '../../_models/location.entity';
 import {Product} from '../../_models/product';
 import {IonSlides} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-list-products',
@@ -26,16 +27,36 @@ export class ListProductsComponent implements OnInit {
   loading = true;
   slides = [];
   currentIndex = 0;
+  itemSetting = {
+    itemWidth: 250,
+    itemHeight: 250
+  };
 
 
   @ViewChild(IonSlides, {static: true}) slidesRef: IonSlides;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private storage: Storage) {
   }
 
   ngOnInit() {
+    this.ionViewDidEnter();
     this.subscribeProducts();
     this.updateData();
+  }
+
+  ionViewDidEnter() {
+    this.storage.get('settings').then(settings => {
+      if (!settings) {
+        settings = {
+          itemPerSlide: 12,
+          itemWidth: 250,
+          itemHeight: 250,
+        };
+      }
+      const {itemPerSlide, ...itemSetting} = settings;
+      this.filterObject.max = itemPerSlide;
+      this.itemSetting = itemSetting;
+    });
   }
 
   subscribeProducts() {
@@ -43,6 +64,7 @@ export class ListProductsComponent implements OnInit {
       debounceTime(300),
       switchMap(filter => {
         this.loading = true;
+        console.log('filter', filter);
         return this.productService.getAllWithFilter(this.location.id, filter);
       })
     ).subscribe(({total, data}) => {

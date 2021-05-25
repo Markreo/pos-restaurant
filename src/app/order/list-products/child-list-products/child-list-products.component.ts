@@ -10,6 +10,8 @@ import {take} from 'rxjs/operators';
 })
 export class ChildListProductsComponent implements OnInit, OnChanges {
   @Input() thisIndex: number;
+  @Input() max = 12;
+  @Input() size;
   @Input() currentIndex = 0;
   inited = false;
   currentLocation;
@@ -38,8 +40,8 @@ export class ChildListProductsComponent implements OnInit, OnChanges {
     this.inited = true;
     this.loading = true;
     this.productService.getAllWithFilter(this.currentLocation.id, {
-      start: (this.thisIndex ) * 12,
-      max: 12
+      start: (this.thisIndex) * this.max,
+      max: this.max
     }).subscribe(resp => {
       this.loading = false;
       this.products = resp.data;

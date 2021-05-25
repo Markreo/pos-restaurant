@@ -5,7 +5,7 @@
     </div>
     <ng-container *ngIf="!loading">
       <div style="display: flex; flex-wrap: wrap; align-content: flex-start;">
-        <app-product-item *ngFor="let product of productsAtPage1" [product]="product"></app-product-item>
+        <app-product-item *ngFor="let product of productsAtPage1" [product]="product" [size]="itemSetting"></app-product-item>
       </div>
       <div *ngIf="productsAtPage1.length == 0">
         Không có sản phẩm nào!
@@ -13,6 +13,6 @@
     </ng-container>
   </ion-slide>
   <ion-slide *ngFor="let slide of slides; let i = index">
-    <app-child-list-products [currentIndex]="currentIndex" [thisIndex]="i + 1"></app-child-list-products>
+    <app-child-list-products [currentIndex]="currentIndex" [thisIndex]="i + 1" [max]="filterObject.max" [size]="itemSetting"></app-child-list-products>
   </ion-slide>
 </ion-slides>

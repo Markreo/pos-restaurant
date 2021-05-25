@@ -11,6 +11,10 @@ import {OrderService} from '../../../_services/order.service';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product;
+  @Input() size = {
+    itemWidth: 250,
+    itemHeight: 250
+  };
 
   loading = false;
   variant: Variant;
