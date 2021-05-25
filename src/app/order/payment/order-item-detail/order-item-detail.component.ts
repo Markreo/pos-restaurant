@@ -60,7 +60,7 @@ export class OrderItemDetailComponent implements OnInit {
 
   markApplyVoucher() {
     this.item.is_voucher = true;
-    if (this.focusKey) {
+    if (this.focusKey && this[this.focusKey + 'Ref']) {
       this[this.focusKey + 'Ref'].nativeElement.focus();
     }
   }
