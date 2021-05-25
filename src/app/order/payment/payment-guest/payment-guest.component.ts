@@ -58,14 +58,17 @@ export class PaymentGuestComponent implements OnInit {
 
   scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
+      console.log('barcodeData', barcodeData);
       this.loading = true;
-      this.guestService.getAllWithFilter(this.golfClub.id, barcodeData).subscribe(({data}) => {
+      this.guestService.getAllWithFilter(this.golfClub.id, {search: barcodeData.text}).subscribe(({data}) => {
+        console.log('data', data);
         this.loading = false;
-        if (data) {
-          this.onClickGuest(this.guest);
+        if (data && data.length) {
+          this.onClickGuest(data[0]);
         }
       }, error => {
         this.loading = false;
+        console.log('error', error);
       });
     }).catch(err => {
       console.log('Error', err);
@@ -78,8 +81,15 @@ export class PaymentGuestComponent implements OnInit {
     this.update();
   }
 
+  handleBlur() {
+    if (this.searchStr.trim() === '') {
+      this.showResult = false;
+    }
+  }
+
   onClickGuest(guest: Guest) {
     this.guest = guest;
+    this.searchStr = '';
     this.guestChange.emit(this.guest);
     this.showResult = false;
     this.guests = [];

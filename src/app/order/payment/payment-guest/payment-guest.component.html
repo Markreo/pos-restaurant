@@ -9,7 +9,7 @@
     <ion-icon *ngIf="!searchStr" class="scan" name="camera"
               (click)="scanBarcode()"></ion-icon>
     <ion-input placeholder="Bagtags" [(ngModel)]="searchStr" (ngModelChange)="update()"
-               (ionFocus)="handleFocus($event)"></ion-input>
+               (ionFocus)="handleFocus($event)" (ionBlur)="handleBlur()"></ion-input>
   </div>
 </ng-container>
 <div *ngIf="showResult"

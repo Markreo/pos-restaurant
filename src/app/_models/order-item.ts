@@ -2,7 +2,7 @@ import {Guest} from './guest';
 
 export class OrderItem {
   id;
-  is_voucher;
+  is_voucher: boolean;
   variant: {
     id; name; other_name,product_id
   };
