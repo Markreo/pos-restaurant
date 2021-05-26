@@ -3,8 +3,7 @@
     <div style="height: 100%; width: 100%; background: white; display: flex; align-items: stretch; overflow: hidden">
       <div
         style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
-        <div class="logo" style="height: 100px; background:#184a7b">
-        </div>
+        <img class="logo" style="height: 100px; width: 100px; background:#184a7b" src="/assets/icon/menu.png" alt="">
         <div class="menu" *ngIf="location">
           <ng-container *ngIf="!location.enable_menu">
             <div class="menu-item" [class.active]="currentMenu?.id === cate.id"
@@ -35,8 +34,12 @@
               <ion-searchbar [placeholder]="'Search for Items'" [(ngModel)]="filter.search" (ngModelChange)="updateSearch()"></ion-searchbar>
             </div>
           </div>
-          <button style="margin-left: 22.5px">LAN</button>
-          <button style="margin-left: 22.5px" [routerLink]="['/home']">LOCK</button>
+          <button style="margin-left: 22.5px">
+            <img src="/assets/icon/lan.png" alt="" style="height: 75px; width: 75px">
+          </button>
+          <button style="margin-left: 22.5px" [routerLink]="['/home']">
+            <img src="/assets/icon/lock.png" alt="" style="height: 75px; width: 75px">
+          </button>
         </div>
         <div class="main-content"
              style=" flex: 1; display: flex; align-items: stretch; padding: 10px; overflow: hidden; min-width: 0">
