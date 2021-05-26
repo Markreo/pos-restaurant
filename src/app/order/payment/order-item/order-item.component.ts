@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OrderItem} from '../../../_models/order-item';
 import {AlertController, ModalController} from '@ionic/angular';
 import {OrderItemDetailComponent} from '../order-item-detail/order-item-detail.component';
@@ -10,6 +10,8 @@ import {OrderItemDetailComponent} from '../order-item-detail/order-item-detail.c
 })
 export class OrderItemComponent implements OnInit {
   @Input() item: OrderItem;
+  @Output() itemChange = new EventEmitter<OrderItem>();
+  @Output() removeItem = new EventEmitter();
 
   constructor(private alertController: AlertController,
               public modalController: ModalController) {
@@ -48,11 +50,21 @@ export class OrderItemComponent implements OnInit {
       component: OrderItemDetailComponent,
       cssClass: 'my-custom-class',
       componentProps: {
-        item: {...this.item}
+        item: {...this.item},
+        updateItem: this.updateItem,
+        removeItem: this.removeThis
       }
     });
     return await modal.present();
   }
 
+  updateItem = (newData) => {
+    this.item = newData;
+    this.itemChange.emit(this.item);
+  };
 
+  removeThis = () => {
+    console.log('remove this');
+    this.removeItem.emit();
+  };
 }

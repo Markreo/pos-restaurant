@@ -16,7 +16,7 @@
     </div>
   </div>
   <div *ngIf="!loading" style="flex: 1; padding: 10px; overflow: auto">
-    <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+    <app-order-item *ngFor="let item of order.items; let i = index" [item]="item" (itemChange)="updateItem(i, $event)" (removeItem)="remove(i)"></app-order-item>
   </div>
   <div style="padding: 22.5px;">
     <ion-button (click)="presentActionSheet()"

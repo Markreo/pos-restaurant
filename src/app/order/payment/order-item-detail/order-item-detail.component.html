@@ -15,7 +15,7 @@
           <input placeholder="Price" #inputPrice
                  (focus)="markFocus('inputPrice')"
                  style="flex: 1;height: 2.5rem; border:2px solid #dee2e6 !important; border-radius: 0 !important; padding-left: 10px; padding-right: 10px"
-                 type="number" [(ngModel)]="item.variant.price_after_discount">
+                 type="number" [(ngModel)]="item.price">
         </div>
         <div style="margin-bottom: 1rem;display: flex; align-items: center">
           <div class="my-label">Quantity:</div>
@@ -89,10 +89,10 @@
           </div>
         </div>
         <div class="ion-text-right">
-          <ion-button color="danger" fill="outline" *ngIf="!item.id">
+          <ion-button color="danger" fill="outline" *ngIf="!item.id" (click)="remove()">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
-          <ion-button color="primary">Save</ion-button>
+          <ion-button color="primary" (click)="onClickSave()">Save</ion-button>
         </div>
       </div>
     </div>

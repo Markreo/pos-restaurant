@@ -219,16 +219,19 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
   checkGuestValidator(): boolean {
-    // if (this.paymentMethod === 'CASH') {
-    //   return true;
-    // }
-    console.log(this.order);
     const itemWithoutBagtag = this.order.items.find(item => !item.guest);
-    console.log('itemWithoutBagtag', itemWithoutBagtag);
     if (itemWithoutBagtag) {
       return !!this.order.guest;
     } else {
       return true;
     }
+  }
+
+  remove(index) {
+    this.order.items.splice(index, 1);
+  }
+
+  updateItem(index, newItem) {
+    this.order.items[index] = newItem;
   }
 }

@@ -1,14 +1,14 @@
 <div class="order-item" [ngClass]="{
     submitted: item.id && !item.waiting_qty && item.cooking_qty,
     'wait-supply': item.id && item.waiting_qty,
-     done: item.id && !item.waiting_qty && !item.cooking_qty}">
+     done: item.id && !item.waiting_qty && !item.cooking_qty}"
+     (click)="presentModal()">
   <div class="item-bagtag"></div>
   <div class="item-name">
     <strong>{{item.variant.name}}</strong>
   </div>
   <div class="item-qty">
-    <ion-button *ngIf="!item.id" color="medium" size="small" (click)="presentModal()">{{item.quantity}}</ion-button>
-    <ng-container *ngIf="item.id">{{item.quantity}}</ng-container>
+    {{item.quantity}}
   </div>
   <div class="item-price">
     {{item.price | formatCurrency}}

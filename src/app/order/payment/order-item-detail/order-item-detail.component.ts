@@ -1,8 +1,9 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {OrderItem} from '../../../_models/order-item';
 import {GuestService} from '../../../_services/guest.service';
 import {GolfClubService} from '../../../_services/golf-club.service';
-import {ToastController} from '@ionic/angular';
+import {ModalController, ToastController} from '@ionic/angular';
+import {OrderService} from '../../../_services/order.service';
 
 @Component({
   selector: 'app-order-item-detail',
@@ -11,6 +12,9 @@ import {ToastController} from '@ionic/angular';
 })
 export class OrderItemDetailComponent implements OnInit {
   @Input() item: OrderItem;
+  @Output() updateItem: (data) => void;
+  @Output() removeItem: () => void;
+
   @ViewChild('inputQty') inputQtyRef: ElementRef;
   @ViewChild('inputPrice') inputPriceRef: ElementRef;
   @ViewChild('inputDescription') inputDescriptionRef: ElementRef;
@@ -22,6 +26,8 @@ export class OrderItemDetailComponent implements OnInit {
   loadingGuest = false;
 
   constructor(private guestService: GuestService,
+              private orderService: OrderService,
+              private modalController: ModalController,
               private toastController: ToastController,
               private golfClubService: GolfClubService) {
   }
@@ -70,7 +76,6 @@ export class OrderItemDetailComponent implements OnInit {
     e.stopPropagation();
     this.loadingGuest = true;
     if (this.inputBagtagRef) {
-      console.log('focus')
       this.inputBagtagRef.nativeElement.focus();
     }
     const golfClubId = this.golfClubService.currentGolfClub ? this.golfClubService.currentGolfClub.id : '';
@@ -95,12 +100,22 @@ export class OrderItemDetailComponent implements OnInit {
 
 
   async presentToast(message, color) {
-    console.log('presentToast');
     const toast = await this.toastController.create({
       message,
       color,
       duration: 2000
     });
     await toast.present();
+  }
+
+  onClickSave() {
+    // this.itemChange.emit(this.item);
+    this.updateItem(this.item);
+    this.modalController.dismiss();
+  }
+
+  remove() {
+    this.removeItem();
+    this.modalController.dismiss();
   }
 }
