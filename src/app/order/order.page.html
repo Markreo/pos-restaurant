@@ -3,7 +3,7 @@
     <div style="height: 100%; width: 100%; background: white; display: flex; align-items: stretch; overflow: hidden">
       <div
         style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
-        <img class="logo" style="height: 100px; width: 100px; background:#184a7b" src="/assets/icon/menu.png" alt="">
+        <img class="logo" style="height: 100px; width: 100px; background:#184a7b" src="/assets/icon/menu.png" alt="" [routerLink]="['/home']">
         <div class="menu" *ngIf="location">
           <ng-container *ngIf="!location.enable_menu">
             <div class="menu-item" [class.active]="currentMenu?.id === cate.id"
@@ -37,7 +37,7 @@
           <button style="margin-left: 22.5px">
             <img src="/assets/icon/lan.png" alt="" style="height: 75px; width: 75px">
           </button>
-          <button style="margin-left: 22.5px" [routerLink]="['/home']">
+          <button style="margin-left: 22.5px" >
             <img src="/assets/icon/lock.png" alt="" style="height: 75px; width: 75px">
           </button>
         </div>
@@ -60,7 +60,7 @@
             </div>
           </div>
 
-          <div class="payment" style="width: 375px; display: flex; flex-direction: column; padding: 15px">
+          <div class="payment" style="width: 24rem; display: flex; flex-direction: column; padding: 1rem">
             <div class="payment-header"
                  style="height: 50px; color: #184c7c; display: flex; justify-content: space-between" *ngIf="location">
               <div>
