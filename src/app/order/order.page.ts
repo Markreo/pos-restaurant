@@ -13,6 +13,8 @@ import {Menu} from '../_models/menu';
 import {MenuService} from '../_services/menu.service';
 import {Category} from '../_models/category';
 import {ListProductsComponent} from './list-products/list-products.component';
+import {isCombinedNodeFlagSet} from 'tslint';
+import {WebsocketService} from '../websocket/websocket-service';
 
 @Component({
   selector: 'app-order',
@@ -52,6 +54,7 @@ export class OrderPage implements OnInit {
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private menuService: MenuService,
+              private websocket: WebsocketService,
               private categoryService: CategoryService) {
   }
 

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TableService} from '../_services/table.service';
 import {GolfClubService} from '../_services/golf-club.service';
 import {LocationService} from '../_services/location.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Table} from '../_models/table';
 import {LocationEntity} from '../_models/location.entity';
 import {GolfClubEntity} from '../_models/golf-club.entity';
@@ -10,14 +10,17 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {AuthService} from '../_services/auth.service';
 import {Observable, Subject} from 'rxjs';
-import {delay, switchMap} from 'rxjs/operators';
+import {debounceTime, delay, map, switchMap, takeUntil} from 'rxjs/operators';
+import {WebsocketService} from '../websocket/websocket-service';
+import {StompConfig} from '@stomp/ng2-stompjs';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   locations: LocationEntity[] = [];
   golfClubs: GolfClubEntity[] = [];
   tables: Table[] = [];
@@ -34,12 +37,17 @@ export class HomePage implements OnInit {
   tableSubject = new Subject<Table[]>();
   initLocation = false;
 
+  destroySubject = new Subject<boolean>();
+
   constructor(private tableService: TableService,
               private golfClubService: GolfClubService,
               private locationService: LocationService,
+              private activated: ActivatedRoute,
               private loadingCtrl: LoadingController,
               private alertController: AlertController,
               private authService: AuthService,
+              private websocket: WebsocketService,
+              private auth: AuthService,
               private router: Router) {
     this.form.get('golfClub').valueChanges.subscribe(golfClub => {
       if (golfClub) {
@@ -61,6 +69,7 @@ export class HomePage implements OnInit {
     this.subscribeLoadLocation();
     this.subscribeTable();
     this.ionViewDidEnter();
+    this.subscribeWebsocket();
   }
 
   ionViewDidEnter() {
@@ -123,6 +132,43 @@ export class HomePage implements OnInit {
     });
   }
 
+  subscribeWebsocket() {
+    this.authService.getToken().then(token => {
+      const config: StompConfig = {
+        url: environment.gms_websocket_server,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        heartbeat_in: 0,
+        heartbeat_out: 20000,
+        reconnect_delay: 5000,
+        debug: false,
+      };
+      this.websocket.config = config;
+      this.websocket.initAndConnect();
+
+      this.golfClubService.getCurrentGolfClub().pipe(
+        debounceTime(300)
+      ).subscribe(golfClub => {
+        if (golfClub) {
+          this.websocket.subscribe(`/queue/events/golf/clubs/${golfClub.id}/orders`, {
+            Authorization: `Bearer ${token}`
+          }).pipe(
+            map(message => JSON.parse(message.body).object)
+          ).subscribe(order => {
+            this.tables = this.tables.map(table => {
+              if (table.id === order.table_map.id) {
+                return order.table_map;
+              } else {
+                return table;
+              }
+            });
+          });
+        }
+      });
+    });
+  }
+
   async presentLoading(message) {
     console.log('presentLoading');
     const loading = await this.loadingCtrl.create({
@@ -156,5 +202,10 @@ export class HomePage implements OnInit {
   handleSave() {
     this.locationService.setLocation(this.form.get('location').value);
     this.router.navigate(['/home']);
+  }
+
+  ngOnDestroy() {
+    this.destroySubject.next(true);
+    this.destroySubject.complete();
   }
 }
