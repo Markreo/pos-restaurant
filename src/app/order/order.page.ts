@@ -3,7 +3,7 @@ import {LocationEntity} from '../_models/location.entity';
 import {LocationService} from '../_services/location.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../_services/category.service';
-import {debounceTime, switchMap, take} from 'rxjs/operators';
+import {debounceTime, map, switchMap, take} from 'rxjs/operators';
 import {TableService} from '../_services/table.service';
 import {combineLatest, of, Subject} from 'rxjs';
 import {GolfClubService} from '../_services/golf-club.service';
@@ -15,6 +15,9 @@ import {Category} from '../_models/category';
 import {ListProductsComponent} from './list-products/list-products.component';
 import {isCombinedNodeFlagSet} from 'tslint';
 import {WebsocketService} from '../websocket/websocket-service';
+import {StompConfig} from '@stomp/ng2-stompjs';
+import {environment} from '../../environments/environment';
+import {AuthService} from '../_services/auth.service';
 
 @Component({
   selector: 'app-order',
