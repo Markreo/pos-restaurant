@@ -14,6 +14,7 @@ import {GolfClubEntity} from '../../../_models/golf-club.entity';
 export class PaymentGuestComponent implements OnInit {
   @Input() guest: Guest;
   @Input() golfClub: GolfClubEntity;
+  @Input() disabled: boolean;
   @Output() guestChange = new EventEmitter<Guest>();
 
   searchStr = '';
@@ -57,6 +58,9 @@ export class PaymentGuestComponent implements OnInit {
   }
 
   scanBarcode() {
+    if (this.disabled) {
+      return;
+    }
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('barcodeData', barcodeData);
       this.loading = true;
@@ -82,9 +86,11 @@ export class PaymentGuestComponent implements OnInit {
   }
 
   handleBlur() {
-    if (this.searchStr.trim() === '') {
-      this.showResult = false;
-    }
+    setTimeout(() => {
+      if (this.searchStr.trim() === '') {
+        this.showResult = false;
+      }
+    }, 200);
   }
 
   onClickGuest(guest: Guest) {

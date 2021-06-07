@@ -10,12 +10,21 @@
   &.bg-gray {
     background: #e6e6e6;
   }
+
+  &.disabled {
+    background: #e6e6e6;
+
+  }
 }
 
 ion-input {
   --padding-top: 0;
   --padding-bottom: 0;
   --background: white;
+
+  &.disabled {
+    --background: #e6e6e6;
+  }
 }
 
 ion-icon.search {

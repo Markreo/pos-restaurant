@@ -74,6 +74,9 @@ export class OrderItemDetailComponent implements OnInit {
   applyBagtag(e) {
     e.preventDefault();
     e.stopPropagation();
+    if (this.keyBagtag.trim() === '') {
+      return;
+    }
     this.loadingGuest = true;
     if (this.inputBagtagRef) {
       this.inputBagtagRef.nativeElement.focus();
@@ -81,7 +84,7 @@ export class OrderItemDetailComponent implements OnInit {
     const golfClubId = this.golfClubService.currentGolfClub ? this.golfClubService.currentGolfClub.id : '';
     this.guestService.getAllWithFilter(golfClubId, {search: this.keyBagtag}).subscribe(({data}) => {
       this.loadingGuest = false;
-      if (data && data.length) {
+      if (data && data.length && data[0].bagtag === this.keyBagtag) {
         this.item.guest = data[0];
         this.presentToast('Apply success!', 'success');
       } else {

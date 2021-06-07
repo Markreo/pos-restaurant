@@ -316,5 +316,12 @@ export class PaymentComponent implements OnInit, OnChanges {
 
   updateItem(index, newItem) {
     this.order.items[index] = newItem;
+    if (this.someItemHasGuest) {
+      this.order.guest = null;
+    }
+  }
+
+  get someItemHasGuest(): boolean {
+    return this.order.items.some(item => !!item.guest);
   }
 }
