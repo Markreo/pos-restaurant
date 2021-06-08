@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {TokenInterceptor} from './_interceptors/token.interceptor';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 const interceptors = [
   {
@@ -20,8 +21,8 @@ const interceptors = [
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,],
-  providers: [interceptors, {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, ScreenOrientation],
+  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule],
+  providers: [interceptors, {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, ScreenOrientation, Network],
   bootstrap: [AppComponent],
 })
 export class AppModule {

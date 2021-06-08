@@ -65,7 +65,6 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.presentLoading('Đang tải thông tin...');
     this.subscribeLoadLocation();
     this.subscribeTable();
     this.ionViewDidEnter();
@@ -99,6 +98,7 @@ export class HomePage implements OnInit, OnDestroy {
         return this.locationService.getAllByClub(golfClub.id);
       })
     ).subscribe(locations => {
+      console.log('location by club', locations);
       this.locations = locations;
 
       if (!this.initLocation) {
@@ -110,10 +110,10 @@ export class HomePage implements OnInit, OnDestroy {
           }
         });
 
-        setTimeout(() => {
-          console.log('dissmiss');
-          this.loadingCtrl.dismiss();
-        }, 500);
+        // setTimeout(() => {
+        //   console.log('dissmiss');
+        //   this.loadingCtrl.dismiss();
+        // }, 500);
       }
     });
   }
@@ -186,7 +186,6 @@ export class HomePage implements OnInit, OnDestroy {
       message: 'Tài khoản của bạn không thể thực hiện thao tác này!',
       buttons: ['OK']
     }).then(_ => {
-      console.log('then');
       this.authService.logout();
     });
 
@@ -202,6 +201,21 @@ export class HomePage implements OnInit, OnDestroy {
   handleSave() {
     this.locationService.setLocation(this.form.get('location').value);
     this.router.navigate(['/home']);
+  }
+
+  doRefresh(event) {
+    this.loadingTable = true;
+    this.tableService.getAll(this.form.get('golfClub').value.id, this.form.get('location').value.id)
+      .pipe(delay(300))
+      .subscribe(tables => {
+        this.tables = tables;
+        this.loadingTable = false;
+        event.target.complete();
+      }, error => {
+        this.loadingTable = false;
+        event.target.complete();
+      }
+    );
   }
 
   ngOnDestroy() {

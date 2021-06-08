@@ -112,4 +112,8 @@ export class ListProductsComponent implements OnInit {
   emitCurrentIndex() {
     this.slidesIndex.emit(this.currentIndex);
   }
+
+  fakeLength() {
+    return Array(this.filterObject.max).fill(0).map((x, i) => i);
+  }
 }

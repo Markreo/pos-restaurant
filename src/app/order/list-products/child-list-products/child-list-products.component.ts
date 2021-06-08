@@ -48,4 +48,7 @@ export class ChildListProductsComponent implements OnInit, OnChanges {
     });
   }
 
+  fakeLength() {
+    return Array(this.max  ).fill(0).map((x, i) => i);
+  }
 }

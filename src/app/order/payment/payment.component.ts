@@ -182,10 +182,10 @@ export class PaymentComponent implements OnInit, OnChanges {
       const loading = await this.presentLoading();
       if (this.order.id) {
         this.orderService.updateOrder(this.golfClub.id, this.order.id, this.order)
-          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitOrderSuccess(loading));
+          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitError(loading));
       } else {
         this.orderService.createOrder(this.golfClub.id, this.order)
-          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitOrderSuccess(loading));
+          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitError(loading));
       }
     }
   }
