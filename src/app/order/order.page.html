@@ -60,13 +60,15 @@
             </div>
           </div>
 
-          <div class="payment" style="width: 24rem; display: flex; flex-direction: column; padding: 1rem">
+          <div class="payment" style="width: 24rem; display: flex; flex-direction: column; padding: 1rem; padding-top: 0">
             <div class="payment-header"
-                 style="height: 50px; color: #184c7c; display: flex; justify-content: space-between" *ngIf="location">
+                 style="height: 50px; color: #184c7c; display: flex; justify-content: space-between; align-items: center" *ngIf="location">
               <div>
                 {{location.name}} | <strong>Table {{table?.code}}</strong>
               </div>
-              <button>Bell</button>
+              <button>
+                <img src="/assets/icon/bell.png" alt="" style="height: 2.5rem; width: 2.5rem">
+              </button>
             </div>
             <app-payment [table]="table" [golfClub]="golfClub"></app-payment>
           </div>
