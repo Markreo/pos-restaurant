@@ -3,6 +3,7 @@ import {Product} from '../../../_models/product';
 import {ProductService} from '../../../_services/product.service';
 import {Variant} from '../../../_models/variant';
 import {OrderService} from '../../../_services/order.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-item',
@@ -19,10 +20,14 @@ export class ProductItemComponent implements OnInit {
   loading = false;
   variant: Variant;
 
-  constructor(private productService: ProductService, private orderService: OrderService) {
+  constructor(private productService: ProductService, private orderService: OrderService, private translate: TranslateService) {
   }
 
   ngOnInit() {
+  }
+
+  get currentLang() {
+    return this.translate.currentLang;
   }
 
   onClickProduct() {

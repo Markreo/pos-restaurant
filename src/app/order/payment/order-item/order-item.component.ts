@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OrderItem} from '../../../_models/order-item';
 import {AlertController, ModalController} from '@ionic/angular';
 import {OrderItemDetailComponent} from '../order-item-detail/order-item-detail.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-item',
@@ -14,10 +15,15 @@ export class OrderItemComponent implements OnInit {
   @Output() removeItem = new EventEmitter();
 
   constructor(private alertController: AlertController,
+              private translate: TranslateService,
               public modalController: ModalController) {
   }
 
   ngOnInit() {
+  }
+
+  get currentLang() {
+    return this.translate.currentLang;
   }
 
   async presentEditQty() {

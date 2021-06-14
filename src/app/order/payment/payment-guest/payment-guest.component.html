@@ -8,7 +8,8 @@
               (click)="searchStr = ''; showResult = false;"></ion-icon>
     <ion-icon *ngIf="!searchStr && !disabled" class="scan" name="camera"
               (click)="scanBarcode()"></ion-icon>
-    <ion-input placeholder="Bagtags" [class.disabled]="disabled" [disabled]="disabled" [(ngModel)]="searchStr" (ngModelChange)="update()"
+    <ion-input [placeholder]="'bagtag' | translate" [class.disabled]="disabled" [disabled]="disabled"
+               [(ngModel)]="searchStr" (ngModelChange)="update()"
                (ionFocus)="handleFocus($event)" (ionBlur)="handleBlur()"></ion-input>
   </div>
 </ng-container>
@@ -40,14 +41,14 @@
   <div *ngIf="!loading" style="flex: 1; overflow: auto">
     <ion-list style="padding-top: 0" *ngIf="guests.length">
       <ion-list-header>
-        <ion-label>List guest:</ion-label>
+        <ion-label>{{'list_guest' | translate}}</ion-label>
       </ion-list-header>
       <ion-item *ngFor="let guest of guests" (click)="onClickGuest(guest)" [disabled]="guest.status === 'CHECKOUT'">
         <ion-label><span [class]="guest.status">#{{guest.bagtag}}</span> {{guest.fullname}}</ion-label>
       </ion-item>
     </ion-list>
     <div class="ion-padding" *ngIf="guests.length === 0">
-      <i>Guest not found!</i>
+      <i>{{'guest_not_found' | translate}}!</i>
     </div>
   </div>
 </div>

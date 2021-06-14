@@ -18,6 +18,7 @@ import {WebsocketService} from '../websocket/websocket-service';
 import {StompConfig} from '@stomp/ng2-stompjs';
 import {environment} from '../../environments/environment';
 import {AuthService} from '../_services/auth.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order',
@@ -58,6 +59,7 @@ export class OrderPage implements OnInit {
               private router: Router,
               private menuService: MenuService,
               private websocket: WebsocketService,
+              private translate: TranslateService,
               private categoryService: CategoryService) {
   }
 
@@ -198,5 +200,17 @@ export class OrderPage implements OnInit {
 
   updatePagination(slides) {
     this.slides = slides;
+  }
+
+  get currentLang() {
+    return this.translate.currentLang;
+  }
+
+  toggleLang() {
+    if (this.currentLang === 'en') {
+      this.translate.use('vi');
+    } else {
+      this.translate.use('en');
+    }
   }
 }

@@ -7,7 +7,7 @@
     <img *ngIf="item.guest" src="/assets/icon/guest.png" alt="" style="width: 1.5rem; height: 1rem">
   </div>
   <div class="item-name">
-    <strong>{{item.variant.name}}</strong>
+    <strong>{{currentLang == 'en' ? item.variant.name : item.variant.other_name}}</strong>
   </div>
   <div class="item-qty">
     {{item.quantity}}

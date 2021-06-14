@@ -15,16 +15,18 @@ import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
 import {ListGuestComponent} from './payment/payment-guest/list-guest/list-guest.component';
 import {OrderItemDetailComponent} from './payment/order-item-detail/order-item-detail.component';
 import {WebsocketModule} from '../websocket/websocket.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    OrderPageRoutingModule,
-    SharedModule,
-    WebsocketModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        OrderPageRoutingModule,
+        SharedModule,
+        WebsocketModule,
+        TranslateModule
+    ],
   providers: [BarcodeScanner],
   declarations: [
     OrderPage,

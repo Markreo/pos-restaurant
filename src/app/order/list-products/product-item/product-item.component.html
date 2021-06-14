@@ -2,7 +2,7 @@
      [ngStyle]="{width: size.itemWidth + 'px', height: size.itemHeight + 'px'}">
   <ion-img [src]="product.image ? product.image : 'http://placehold.it/380'"></ion-img>
   <div style="position: absolute; bottom: 0; padding: 0.5rem; width: 100%; background: white; font-size: 70%">
-    <strong>{{product.name}}</strong>
+    <strong>{{currentLang === 'en' ? product.name : product.other_name}}</strong>
     <div>{{product.formatted_sale_price}}</div>
   </div>
 </div>

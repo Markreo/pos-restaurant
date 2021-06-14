@@ -28,13 +28,13 @@
           <div class="search"
                style="background: white; flex: 1; border-radius: 35px; display: flex; align-items: center; padding: 0.75rem 1.5rem">
             <div style="border-right: 2px solid black; padding-right: 0.75rem; white-space: nowrap">
-              Food & Beverages
+              {{'food_beverages'| translate}}
             </div>
             <div style="padding-left: 10px; flex: 1">
-              <ion-searchbar [placeholder]="'Search for Items'" [(ngModel)]="filter.search" (ngModelChange)="updateSearch()"></ion-searchbar>
+              <ion-searchbar [placeholder]="'search_item' | translate" [(ngModel)]="filter.search" (ngModelChange)="updateSearch()"></ion-searchbar>
             </div>
           </div>
-          <button style="margin-left: 1.5rem">
+          <button style="margin-left: 1.5rem" (click)="toggleLang()">
             <img src="/assets/icon/lan.png" alt="" style="height: 4rem; width: 4rem">
           </button>
           <button style="margin-left: 1.5rem" >
