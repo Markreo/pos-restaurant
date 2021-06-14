@@ -1,1 +1,9 @@
-{}
+{
+  "login": "Sign in",
+  "login_fail":  "Username or password is incorrect!",
+  "password": "Password",
+  "required_username": "You need to enter your Account",
+  "required_password": "You need to enter your Password",
+  "signing": "Signing",
+  "username": "Username"
+}

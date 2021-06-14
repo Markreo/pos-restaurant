@@ -1,1 +1,9 @@
-{}
+{
+  "login": "Đăng nhập",
+  "login_fail":  "Tên đăng nhập hoặc mật khẩu không đúng!",
+  "password": "Mật khẩu",
+  "required_username": "Bạn cần nhập vào Tài khoản",
+  "required_password": "Bạn cần nhập vào Mật khẩu",
+  "signing": "Đang đăng nhập",
+  "username": "Tài khoản"
+}

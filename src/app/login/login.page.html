@@ -11,30 +11,30 @@
         <div class="ion-padding">
           <form #loginForm="ngForm" novalidate>
             <ion-row class="ion-margin-bottom">
-              <ion-input class="ion-padding-start" type="text" placeholder="Tài khoản" name="username"
+              <ion-input class="ion-padding-start" type="text" [placeholder]="'username' | translate" name="username"
                          [(ngModel)]="credentials.username"
                          #username="ngModel"
                          required></ion-input>
             </ion-row>
             <ion-row class="ion-margin-bottom">
               <ion-text color="warning" [hidden]="username.valid || submitted == false">
-                Bạn cần nhập vào Tài khoản
+                {{'required_username'| translate}}
               </ion-text>
             </ion-row>
             <ion-row class="ion-margin-bottom">
-              <ion-input class="ion-padding-start" type="password" placeholder="Mật khẩu" name="password"
+              <ion-input class="ion-padding-start" type="password" [placeholder]="'password'| translate" name="password"
                          [(ngModel)]="credentials.password"
                          #password="ngModel"
                          required></ion-input>
             </ion-row>
             <ion-row class="ion-margin-bottom">
               <ion-text color="warning" [hidden]="password.valid || submitted == false">
-                Bạn cần nhập vào Mật khẩu
+                {{'required_username'| translate}}
               </ion-text>
             </ion-row>
             <ion-row>
               <ion-col class="ion-no-padding">
-                <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Đăng nhập</ion-button>
+                <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">{{'login'| translate}}</ion-button>
               </ion-col>
             </ion-row>
           </form>

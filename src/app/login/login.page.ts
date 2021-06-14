@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {AuthService} from '../_services/auth.service';
 import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
   constructor(private loadingCtrl: LoadingController,
               private authService: AuthService,
               private router: Router,
+              private translate: TranslateService,
               private alertCtrl: AlertController) {
   }
 
@@ -35,7 +37,7 @@ export class LoginPage implements OnInit {
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
       spinner: 'circular',
-      message: 'Đang đăng nhập...',
+      message: this.translate.instant('signing') + '...',
       translucent: false,
     });
     await loading.present();
@@ -43,7 +45,7 @@ export class LoginPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
-      message: 'Tên đăng nhập hoặc mật khẩu không đúng!',
+      message: this.translate.instant('login_fail'),
       buttons: ['OK']
     });
 
