@@ -1,9 +1,13 @@
 {
+  "choose_table": "<strong>Choose</strong> Table",
+  "language" : "Language",
   "login": "Sign in",
   "login_fail":  "Username or password is incorrect!",
+  "logout": "Logout",
   "password": "Password",
   "required_username": "You need to enter your Account",
   "required_password": "You need to enter your Password",
+  "search": "Search",
   "signing": "Signing",
   "username": "Username"
 }

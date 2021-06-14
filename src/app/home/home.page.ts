@@ -14,6 +14,7 @@ import {debounceTime, delay, map, switchMap, takeUntil} from 'rxjs/operators';
 import {WebsocketService} from '../websocket/websocket-service';
 import {StompConfig} from '@stomp/ng2-stompjs';
 import {environment} from '../../environments/environment';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,8 @@ export class HomePage implements OnInit, OnDestroy {
   getLocationSubscription: Observable<Location[]>;
 
   loadLocationSubject = new Subject<GolfClubEntity>();
-  tableSubject = new Subject<Table[]>();
+  tableSubject = new Subject<string>();
+  searchTable = '';
   initLocation = false;
 
   destroySubject = new Subject<boolean>();
@@ -47,6 +49,7 @@ export class HomePage implements OnInit, OnDestroy {
               private alertController: AlertController,
               private authService: AuthService,
               private websocket: WebsocketService,
+              private translate: TranslateService,
               private auth: AuthService,
               private router: Router) {
     this.form.get('golfClub').valueChanges.subscribe(golfClub => {
@@ -57,10 +60,10 @@ export class HomePage implements OnInit, OnDestroy {
     });
     this.form.get('location').valueChanges.subscribe(location => {
       if (location) {
+        this.searchTable = '';
         this.locationService.setLocation(location);
-        this.tableSubject.next();
+        this.tableSubject.next('');
       }
-
     });
   }
 
@@ -120,9 +123,9 @@ export class HomePage implements OnInit, OnDestroy {
 
   subscribeTable() {
     this.tableSubject.pipe(
-      switchMap(() => {
+      switchMap((search) => {
         this.loadingTable = true;
-        return this.tableService.getAll(this.form.get('golfClub').value.id, this.form.get('location').value.id);
+        return this.tableService.getAll(this.form.get('golfClub').value.id, this.form.get('location').value.id, search);
       })
     ).subscribe(tables => {
       this.loadingTable = false;
@@ -130,6 +133,10 @@ export class HomePage implements OnInit, OnDestroy {
     }, error => {
       this.loadingTable = false;
     });
+  }
+
+  updateSearch() {
+    this.tableSubject.next(this.searchTable);
   }
 
   subscribeWebsocket() {
@@ -208,15 +215,28 @@ export class HomePage implements OnInit, OnDestroy {
     this.tableService.getAll(this.form.get('golfClub').value.id, this.form.get('location').value.id)
       .pipe(delay(300))
       .subscribe(tables => {
-        this.tables = tables;
-        this.loadingTable = false;
-        event.target.complete();
-      }, error => {
-        this.loadingTable = false;
-        event.target.complete();
-      }
-    );
+          this.tables = tables;
+          this.loadingTable = false;
+          event.target.complete();
+        }, error => {
+          this.loadingTable = false;
+          event.target.complete();
+        }
+      );
   }
+
+  get currentLang() {
+    return this.translate.currentLang;
+  }
+
+  toggleLang() {
+    if (this.currentLang === 'en') {
+      this.translate.use('vi');
+    } else {
+      this.translate.use('en');
+    }
+  }
+
 
   ngOnDestroy() {
     this.destroySubject.next(true);

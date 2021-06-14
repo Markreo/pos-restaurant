@@ -8,8 +8,8 @@ export class TableService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(golfId, location) {
-    return this.http.get<Table[]>(buildUrl(`golf/clubs/${golfId}/tables?location=${location}`));
+  getAll(golfId, location, search?) {
+    return this.http.get<Table[]>(buildUrl(`golf/clubs/${golfId}/tables?location=${location}&search=${search}`));
   }
 
   clean() {

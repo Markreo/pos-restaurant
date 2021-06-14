@@ -5,17 +5,19 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HomePage} from './home.page';
 import {HomePageRoutingModule} from './home-routing.module';
 import {WebsocketModule} from '../websocket/websocket.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    ReactiveFormsModule,
-    WebsocketModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        ReactiveFormsModule,
+        WebsocketModule,
+        TranslateModule
+    ],
   declarations: [HomePage],
 })
 export class HomePageModule {
