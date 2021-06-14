@@ -14,7 +14,13 @@ export function convertDataToServer(object) {
     if (typeof object[b] !== 'undefined') {
       if (typeof object[b] === 'object') {
         if (Array.isArray(object[b])) {
-          a[b] = object[b].map(bItem => convertDataToServer(bItem));
+          a[b] = object[b].map(bItem => {
+            if (typeof bItem === 'object') {
+              return convertDataToServer(bItem);
+            } else {
+              return bItem;
+            }
+          });
         } else {
           if (object[b] && object[b].id) {
             a[b] = object[b].id;

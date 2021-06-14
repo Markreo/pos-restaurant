@@ -3,7 +3,9 @@
     'wait-supply': item.id && item.waiting_qty,
      done: item.id && !item.waiting_qty && !item.cooking_qty}"
      (click)="presentModal()">
-  <div class="item-bagtag"></div>
+  <div class="item-bagtag">
+    <img *ngIf="item.guest" src="/assets/icon/guest.png" alt="" style="width: 1.5rem; height: 1rem">
+  </div>
   <div class="item-name">
     <strong>{{item.variant.name}}</strong>
   </div>

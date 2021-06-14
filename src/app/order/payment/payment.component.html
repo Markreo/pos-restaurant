@@ -32,17 +32,17 @@
       <div style="display: flex; flex-wrap: wrap; justify-content: flex-end">
         <button class="btn btn-sm btn-method" [class.active]="order.payment_method === 'CASH'"
                 (click)="order.payment_method = 'CASH'" [disabled]="!!order.guest || someItemHasGuest">
-          <img src="/assets/images/icon/cash.svg" alt="">
+<!--          <img src="/assets/images/icon/cash.svg" alt="">-->
           Cash
         </button>
         <button class="btn btn-sm btn-method" [class.active]="order.payment_method === 'VOUCHER'"
                 (click)="order.payment_method = 'VOUCHER'">
-          <img src="/assets/images/icon/voucher-white.svg" alt="">
+<!--          <img src="/assets/images/icon/voucher-white.svg" alt="">-->
           Voucher
         </button>
         <button class="btn btn-sm btn-method" [class.active]="order.payment_method === 'WITH_GOLF'"
                 (click)="order.payment_method = 'WITH_GOLF'">
-          <img src="/assets/images/icon/paywithgolf.svg" alt="">
+<!--          <img src="/assets/images/icon/paywithgolf.svg" alt="">-->
           Pay with Golf
         </button>
       </div>
