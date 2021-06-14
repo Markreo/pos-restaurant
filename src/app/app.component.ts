@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 import {Platform, ToastController} from '@ionic/angular';
 import {Network} from '@ionic-native/network/ngx';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private screenOrientation: ScreenOrientation,
               public platform: Platform,
               private network: Network,
-              public toastController: ToastController) {
+              public toastController: ToastController,
+              private translate: TranslateService) {
     if (this.platform.is('cordova')) {
       this.platform.ready().then(() => {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
@@ -29,6 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log('Orientation Changed');
       }
     );
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   async ngOnInit() {
