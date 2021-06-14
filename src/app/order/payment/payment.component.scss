@@ -58,3 +58,30 @@ ion-button.submit-btn {
   --color: #184c7c;;
   overflow: hidden
 }
+
+.btn-method {
+  background: #7f7f7f;
+  color: white;
+  margin: 0.25rem;
+  border-radius: 4px;
+  padding: 0.25rem;
+
+  img {
+    width: 17px;
+  }
+
+  &:hover {
+    color: white !important;
+  }
+
+  &.active {
+    background: #56BFD0;
+  }
+}
+
+.custom-select {
+  display: inline-block;
+  background-color: #fff;
+  margin: 2px;
+  border-radius: 4px;
+}

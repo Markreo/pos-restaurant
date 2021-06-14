@@ -7,7 +7,7 @@
       <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
     </div>
   </div>
-</div>>
+</div>
 <ng-container *ngIf="!loading">
   <div style="display: flex; flex-wrap: wrap; align-content: flex-start;">
     <app-product-item *ngFor="let product of products" [product]="product" [size]="size"></app-product-item>

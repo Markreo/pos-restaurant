@@ -4,7 +4,8 @@
     Loading....
   </div>
   <div *ngIf="!loading">
-    <app-payment-guest [guest]="order.guest" (guestChange)="setGuest($event)" [golfClub]="golfClub" [disabled]="someItemHasGuest"></app-payment-guest>
+    <app-payment-guest [guest]="order.guest" (guestChange)="setGuest($event)" [golfClub]="golfClub"
+                       [disabled]="someItemHasGuest"></app-payment-guest>
     <div
       style="border-bottom: 1px; display: flex; padding-bottom: 5px ; border-bottom: 1px solid #518ac6; margin: 10px">
       <div class="item-bagtag"></div>
@@ -16,9 +17,38 @@
     </div>
   </div>
   <div *ngIf="!loading" style="flex: 1; padding: 10px; overflow: auto">
-    <app-order-item *ngFor="let item of order.items; let i = index" [item]="item" (itemChange)="updateItem(i, $event)" (removeItem)="remove(i)"></app-order-item>
+    <app-order-item *ngFor="let item of order.items; let i = index" [item]="item" (itemChange)="updateItem(i, $event)"
+                    (removeItem)="remove(i)"></app-order-item>
   </div>
-  <div style="padding: 22.5px;">
+  <div *ngIf="order && order.items.length" style="padding: 1rem">
+    <div style="display: flex; justify-content: space-between">
+      <div>Total payment:</div>
+      <div>
+        <strong>{{getTotal() - getOrderDiscount()| formatCurrency}}</strong>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between">
+      <div style="white-space: nowrap">Payment method:</div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: flex-end">
+        <button class="btn btn-sm btn-method" [class.active]="order.payment_method === 'CASH'"
+                (click)="order.payment_method = 'CASH'" [disabled]="!!order.guest || someItemHasGuest">
+          <img src="/assets/images/icon/cash.svg" alt="">
+          Cash
+        </button>
+        <button class="btn btn-sm btn-method" [class.active]="order.payment_method === 'VOUCHER'"
+                (click)="order.payment_method = 'VOUCHER'">
+          <img src="/assets/images/icon/voucher-white.svg" alt="">
+          Voucher
+        </button>
+        <button class="btn btn-sm btn-method" [class.active]="order.payment_method === 'WITH_GOLF'"
+                (click)="order.payment_method = 'WITH_GOLF'">
+          <img src="/assets/images/icon/paywithgolf.svg" alt="">
+          Pay with Golf
+        </button>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 1.5rem; padding-top: 0">
     <ion-button (click)="presentActionSheet()"
                 class="submit-btn"
                 [disabled]="loading">

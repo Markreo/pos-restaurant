@@ -8,6 +8,10 @@ export class Order {
   type: string;
   description: string;
   table_map: Table;
+  payment_method: string;
+
+  discount: number;
+  discount_type: 'FIXED' | 'PERCENTAGE';
 
   constructor(entity: Partial<Order> = {}) {
     this.id = entity.id;
@@ -16,5 +20,8 @@ export class Order {
     this.guest = entity.guest;
     this.description = entity.description;
     this.table_map = entity.table_map;
+    this.payment_method = entity.payment_method;
+    this.discount = entity.discount || 0;
+    this.discount_type = entity.discount_type || 'FIXED';
   }
 }

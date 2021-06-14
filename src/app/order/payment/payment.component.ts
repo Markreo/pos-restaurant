@@ -12,6 +12,7 @@ import {StompConfig} from '@stomp/ng2-stompjs';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../../_services/auth.service';
 import {WebsocketService} from '../../websocket/websocket-service';
+import {caculatorDiscount} from '../../_helpers/functions';
 
 @Component({
   selector: 'app-payment',
@@ -153,7 +154,8 @@ export class PaymentComponent implements OnInit, OnChanges {
 
   initNewOrder() {
     this.order = new Order({
-      table_map: this.table
+      table_map: this.table,
+      payment_method: 'WITH_GOLF'
     });
   }
 
@@ -324,4 +326,24 @@ export class PaymentComponent implements OnInit, OnChanges {
   get someItemHasGuest(): boolean {
     return this.order.items.some(item => !!item.guest);
   }
+
+  getTotal(): number {
+    return this.order.items.reduce((total, item) => {
+      return total += this.getItemTotal(item);
+    }, 0);
+  }
+
+  getItemTotal(item) {
+    if (item.is_voucher) {
+      return 0;
+    } else {
+      return item.price * item.quantity - caculatorDiscount(item, item.variant.sale_price, item.quantity);
+    }
+  }
+
+  getOrderDiscount() {
+    return caculatorDiscount(this.order, this.getTotal());
+  }
+
+
 }

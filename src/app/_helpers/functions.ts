@@ -54,3 +54,24 @@ export function getToday() {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
+export function caculatorDiscount(item: { discount: number, discount_type: 'FIXED' | 'PERCENTAGE' }, price: number, quantity = 1): number {
+  let value = 0;
+  if (price === 0 || quantity === 0) {
+    return 0;
+  }
+  if (item.discount && item.discount_type) {
+    if (item.discount_type === 'FIXED') {
+      value = item.discount * quantity;
+    } else {
+      value = item.discount * price * quantity / 100;
+    }
+  }
+
+  if (value < 0) {
+    return 0;
+  }
+  if (value > price * quantity) {
+    return price * quantity;
+  }
+  return value;
+}
