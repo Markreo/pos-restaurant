@@ -1,7 +1,7 @@
 <div class="payment-content">
   <div *ngIf="loading === 'loadingOrder'" style="flex: 1; display: flex; justify-content: center; align-items: center">
     <ion-spinner></ion-spinner>
-    Loading....
+    {{'loading' | translate}}....
   </div>
   <div *ngIf="!loading">
     <app-payment-guest [guest]="order.guest" (guestChange)="setGuest($event)" [golfClub]="golfClub"

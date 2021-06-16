@@ -13,6 +13,7 @@ import {environment} from '../../../environments/environment';
 import {AuthService} from '../../_services/auth.service';
 import {WebsocketService} from '../../websocket/websocket-service';
 import {caculatorDiscount} from '../../_helpers/functions';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment',
@@ -32,6 +33,7 @@ export class PaymentComponent implements OnInit, OnChanges {
               private authService: AuthService,
               private websocket: WebsocketService,
               private alertController: AlertController,
+              private translate: TranslateService,
               private actionSheetController: ActionSheetController) {
   }
 
@@ -175,34 +177,37 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
   async submitOrder() {
-    const {role} = await this.presentAlert(`Do you want to ${this.order.id ? 'Update' : 'Submit'} order?`,
+    const {role} = await this.presentAlert(this.translate.instant(this.order.id ? 'confirm_update' : 'confirm_submit'),
       [
-        {text: 'Cancel', role: 'Cancel'},
-        {text: 'OK', role: 'OK'}
+        {text: this.translate.instant('cancel'), role: 'Cancel'},
+        {text: this.translate.instant('ok'), role: 'OK'}
       ]);
     if (role === 'OK') {
       const loading = await this.presentLoading();
       if (this.order.id) {
         this.orderService.updateOrder(this.golfClub.id, this.order.id, this.order)
-          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitError(loading));
+          .subscribe(this.onSubmitOrderSuccess(loading, true), this.onSubmitError(loading));
       } else {
         this.orderService.createOrder(this.golfClub.id, this.order)
-          .subscribe(this.onSubmitOrderSuccess(loading), this.onSubmitError(loading));
+          .subscribe(this.onSubmitOrderSuccess(loading, false), this.onSubmitError(loading));
       }
     }
   }
 
   async checkoutOrder() {
     if (!this.checkGuestValidator()) {
-      await this.presentAlert('Guest cannot be null!');
+      await this.presentAlert(this.translate.instant('guest_not_null'));
       return;
     }
 
-    const {role} = await this.presentAlert('Do you want to checkout?', [{text: 'Cancel', role: 'Cancel'}, {text: 'OK', role: 'OK'}]);
+    const {role} = await this.presentAlert(this.translate.instant('confirm_checkout'), [{
+      text: this.translate.instant('cancel'),
+      role: 'Cancel'
+    }, {text: this.translate.instant('ok'), role: 'OK'}]);
     if (role === 'OK') {
       const loading = await this.presentLoading();
       this.orderService.checkout(this.order.id, {
-        lang: 'en',
+        lang: this.translate.currentLang,
         items: this.order.items.map(item => {
           return {
             id: item.id,
@@ -212,7 +217,7 @@ export class PaymentComponent implements OnInit, OnChanges {
           };
         })
       }).subscribe(order => {
-        this.presentToast('primary', 'Checkout success!');
+        this.presentToast('primary', this.translate.instant('checkout_success'));
         this.initNewOrder();
         loading.dismiss();
       }, error => {
@@ -231,11 +236,11 @@ export class PaymentComponent implements OnInit, OnChanges {
   }
 
 
-  onSubmitOrderSuccess = (loading: HTMLIonLoadingElement) => {
+  onSubmitOrderSuccess = (loading: HTMLIonLoadingElement, isUpdate = false) => {
     return (order: Order) => {
       this.order = order;
       loading.dismiss();
-      this.presentToast('success', 'Submit order success!');
+      this.presentToast('success', this.translate.instant(isUpdate ? 'update_success' : 'submit_success'));
     };
   };
 
@@ -243,7 +248,7 @@ export class PaymentComponent implements OnInit, OnChanges {
     return (error) => {
       // show error
       loading.dismiss();
-      this.presentToast('danger', 'Something error!');
+      this.presentToast('danger', this.translate.instant('submit_error'));
     };
   };
 
@@ -272,19 +277,19 @@ export class PaymentComponent implements OnInit, OnChanges {
       const actionSheet = await this.actionSheetController.create({
         buttons: [
           {
-            text: 'Update Order',
+            text: this.translate.instant('update_order'),
             handler: () => {
               this.submitOrder();
             }
           },
           {
-            text: 'Checkout Order',
+            text: this.translate.instant('checkout'),
             handler: () => {
               this.checkoutOrder();
             }
           },
           {
-            text: 'Cancel',
+            text: this.translate.instant('cancel'),
             role: 'cancel',
             handler: () => {
               console.log('Cancel clicked');
