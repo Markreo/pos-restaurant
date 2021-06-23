@@ -1,45 +1,50 @@
 <ion-content class="login-content ion-padding">
-  <ion-row class="logo-row">
-    <ion-col size="8" offset="2" class="ion-text-center">
-      <img src="http://placehold.it/300x150"/>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-
-    <ion-col size-md="8" offset-md="2" size-lg="4" offset-lg="4" size-xl="3" offset-xl="4.5">
-      <div class="login-box ion-padding ion-margin-top">
-        <div class="ion-padding">
-          <form #loginForm="ngForm" novalidate>
-            <ion-row class="ion-margin-bottom">
-              <ion-input class="ion-padding-start" type="text" [placeholder]="'username' | translate" name="username"
-                         [(ngModel)]="credentials.username"
-                         #username="ngModel"
-                         required></ion-input>
-            </ion-row>
-            <ion-row class="ion-margin-bottom">
-              <ion-text color="warning" [hidden]="username.valid || submitted == false">
-                {{'required_username'| translate}}
-              </ion-text>
-            </ion-row>
-            <ion-row class="ion-margin-bottom">
-              <ion-input class="ion-padding-start" type="password" [placeholder]="'password'| translate" name="password"
-                         [(ngModel)]="credentials.password"
-                         #password="ngModel"
-                         required></ion-input>
-            </ion-row>
-            <ion-row class="ion-margin-bottom">
-              <ion-text color="warning" [hidden]="password.valid || submitted == false">
-                {{'required_username'| translate}}
-              </ion-text>
-            </ion-row>
-            <ion-row>
-              <ion-col class="ion-no-padding">
-                <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">{{'login'| translate}}</ion-button>
-              </ion-col>
-            </ion-row>
-          </form>
+  <div class="background" style="display: flex; flex-direction: column">
+    <ion-row style="flex: 3" class="logo-row ion-align-items-center">
+      <ion-col size-xs="6" offset-xs="3" size-sm="4" offset-sm="4" size-md="3" offset-md="4.5" size-lg="3" offset-lg="4.5" class="ion-text-center">
+        <div style="position: relative">
+          <img style="width: 100%" src="/assets/images/logo-west-lakes-white.svg"/>
         </div>
-      </div>
-    </ion-col>
-  </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row style="flex: 7" class="ion-align-items-center">
+
+      <ion-col size-md="8" offset-md="2" size-lg="6" offset-lg="3" size-xl="3" offset-xl="4.5">
+        <div class="login-box ion-padding ion-margin-top">
+          <div class="ion-padding">
+            <form #loginForm="ngForm" novalidate>
+              <ion-row class="ion-margin-bottom">
+                <input class="ion-padding-start" type="text" [placeholder]="'username' | translate" name="username"
+                           [(ngModel)]="credentials.username"
+                           #username="ngModel"
+                           required>
+              </ion-row>
+              <ion-row class="ion-margin-bottom">
+                <ion-text color="warning" [hidden]="username.valid || submitted == false">
+                  {{'required_username'| translate}}
+                </ion-text>
+              </ion-row>
+              <ion-row class="ion-margin-bottom">
+                <input class="ion-padding-start" type="password" [placeholder]="'password'| translate" name="password"
+                           [(ngModel)]="credentials.password"
+                           #password="ngModel"
+                           required>
+              </ion-row>
+              <ion-row class="ion-margin-bottom">
+                <ion-text color="warning" [hidden]="password.valid || submitted == false">
+                  {{'required_username'| translate}}
+                </ion-text>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-no-padding">
+                  <button (click)="onLogin(loginForm)" type="submit">{{'login'| translate}}</button>
+                </ion-col>
+              </ion-row>
+            </form>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="flex: 3;"></ion-row>
+  </div>
 </ion-content>

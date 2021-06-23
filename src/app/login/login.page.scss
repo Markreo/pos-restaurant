@@ -1,5 +1,19 @@
+$border-radius: 40px;
+$color: white;
 ion-content {
-  --background: #56CA96;
+  --padding-end: 0;
+  --padding-start: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.background {
+  height: 100%;
+  background: url("/assets/images/background-login.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .logo-row {
@@ -9,25 +23,45 @@ ion-content {
 
 
 .login-box {
-  background: #399F8B;
 }
 
+input {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $border-radius;
+  border: none;
+  overflow: hidden;
+  color: $color;
+  padding-left: 5rem;
 
-.submit-btn {
-  background: #51CFB1;
-  border-radius: 30px !important;
-  border: 1px solid #ffffff;
+  &:focus {
+    outline: none;
+    border: none;
+  }
 }
 
-.register-btn {
-  color: #ffffff;
-  font-size: 0.8em;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: $color;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-ion-input {
-  background: white;
+input::placeholder {
+  color: $color;
+  opacity: 1; /* Firefox */
 }
 
-ion-button {
-  --background: #56CA96;
+button {
+  background: #ffcb2a;
+  display: block;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  border-radius: $border-radius;
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 1.2rem;
 }
