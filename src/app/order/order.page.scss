@@ -13,18 +13,16 @@ ion-content {
   width: 100%;
 
   .category-item {
-    margin-right: 22.5px;
-    margin-bottom: 7.125px;
-    border: 1px solid white;
-    border-radius: 7.125px;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #184c7c;
     font-size: 90%;
     white-space: nowrap;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0.25rem 1rem;
 
     &.active {
       background: white;
@@ -41,7 +39,7 @@ ion-content {
   .menu-item {
     margin: 15px 15px 25px 15px;
     border-radius: 17.5px;
-    padding: 7.5px 15px ;
+    padding: 7.5px 15px;
     white-space: nowrap;
     overflow: hidden;
     font-size: 9px;

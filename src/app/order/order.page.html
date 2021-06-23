@@ -3,7 +3,8 @@
     <div style="height: 100%; width: 100%; background: white; display: flex; align-items: stretch; overflow: hidden">
       <div
         style="width: 100px;min-width: 100px; background: white; display: flex; flex-direction: column; overflow: hidden">
-        <img class="logo" style="height: 100px; width: 100px; background:#184a7b" src="/assets/icon/menu.png" alt="" [routerLink]="['/home']">
+        <img class="logo" style="height: 100px; width: 100px; background:#184a7b" src="/assets/icon/menu.png" alt=""
+             [routerLink]="['/home']">
         <div class="menu" *ngIf="location">
           <ng-container *ngIf="!location.enable_menu">
             <div class="menu-item" [class.active]="currentMenu?.id === cate.id"
@@ -31,13 +32,14 @@
               {{'food_beverages'| translate}}
             </div>
             <div style="padding-left: 10px; flex: 1">
-              <ion-searchbar [placeholder]="'search_item' | translate" [(ngModel)]="filter.search" (ngModelChange)="updateSearch()"></ion-searchbar>
+              <ion-searchbar [placeholder]="'search_item' | translate" [(ngModel)]="filter.search"
+                             (ngModelChange)="updateSearch()"></ion-searchbar>
             </div>
           </div>
           <button style="margin-left: 1.5rem" (click)="toggleLang()">
             <img src="/assets/icon/lan.png" alt="" style="height: 4rem; width: 4rem">
           </button>
-          <button style="margin-left: 1.5rem" >
+          <button style="margin-left: 1.5rem">
             <img src="/assets/icon/lock.png" alt="" style="height: 4rem; width: 4rem">
           </button>
         </div>
@@ -48,7 +50,11 @@
               <div class="category-item" [class.active]="!currentSubCate" (click)="selectSubCategory(null)">All</div>
               <div class="category-item" *ngFor="let subCate of subCategories"
                    (click)="selectSubCategory(subCate)"
-                   [class.active]="currentSubCate && currentSubCate.id === subCate.id">{{subCate.name}}</div>
+                   [class.active]="currentSubCate && currentSubCate.id === subCate.id">
+<!--                <img *ngIf="subCate.icon" [src]="subCate.icon" alt="" style="height: 1rem; width: 1rem; margin-right: 0.5rem">-->
+                <img [src]="'/assets/icon/buger.png'" alt="" style="height: 1rem; width: 1rem; margin-right: 0.5rem">
+                {{subCate.name}}
+              </div>
             </div>
             <div class="items" style="flex: 1; overflow: auto">
               <app-list-products [location]="location" (slidesLength)="updatePagination($event)"
@@ -60,9 +66,11 @@
             </div>
           </div>
 
-          <div class="payment" style="width: 24rem; display: flex; flex-direction: column; padding: 1rem; padding-top: 0">
+          <div class="payment"
+               style="width: 24rem; display: flex; flex-direction: column; padding: 1rem; padding-top: 0">
             <div class="payment-header"
-                 style="height: 3rem; color: #184c7c; display: flex; justify-content: space-between; align-items: center" *ngIf="location">
+                 style="height: 3rem; color: #184c7c; display: flex; justify-content: space-between; align-items: center"
+                 *ngIf="location">
               <div>
                 {{location.name}} | <strong>Table {{table?.code}}</strong>
               </div>
