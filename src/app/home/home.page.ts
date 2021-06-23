@@ -212,7 +212,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   doRefresh(event) {
     this.loadingTable = true;
-    this.tableService.getAll(this.form.get('golfClub').value.id, this.form.get('location').value.id)
+    this.tableService.getAll(this.form.get('golfClub').value.id, this.form.get('location').value.id, this.searchTable)
       .pipe(delay(300))
       .subscribe(tables => {
           this.tables = tables;

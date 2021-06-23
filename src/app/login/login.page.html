@@ -3,7 +3,7 @@
     <ion-row style="flex: 3" class="logo-row ion-align-items-center">
       <ion-col size-xs="6" offset-xs="3" size-sm="4" offset-sm="4" size-md="3" offset-md="4.5" size-lg="3" offset-lg="4.5" class="ion-text-center">
         <div style="position: relative">
-          <img style="width: 100%" src="/assets/images/logo-west-lakes-white.svg"/>
+          <img class="logo" style="width: 100%" src="/assets/images/logo-west-lakes-white.svg"/>
         </div>
       </ion-col>
     </ion-row>
@@ -13,7 +13,8 @@
         <div class="login-box ion-padding ion-margin-top">
           <div class="ion-padding">
             <form #loginForm="ngForm" novalidate>
-              <ion-row class="ion-margin-bottom">
+              <ion-row class="ion-margin-bottom" style="position: relative">
+                <img class="input-icon" src="/assets/icon/user.png">
                 <input class="ion-padding-start" type="text" [placeholder]="'username' | translate" name="username"
                            [(ngModel)]="credentials.username"
                            #username="ngModel"
@@ -24,7 +25,8 @@
                   {{'required_username'| translate}}
                 </ion-text>
               </ion-row>
-              <ion-row class="ion-margin-bottom">
+              <ion-row class="ion-margin-bottom" style="position: relative">
+                <img class="input-icon" src="/assets/icon/key.png">
                 <input class="ion-padding-start" type="password" [placeholder]="'password'| translate" name="password"
                            [(ngModel)]="credentials.password"
                            #password="ngModel"

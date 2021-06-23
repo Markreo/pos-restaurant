@@ -59,9 +59,25 @@ button {
   background: #ffcb2a;
   display: block;
   width: 100%;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 2rem;
   border-radius: $border-radius;
   text-transform: uppercase;
   font-weight: bolder;
   font-size: 1.2rem;
+}
+
+
+@media (max-height: 500px) {
+  .logo {
+    visibility: hidden;
+  }
+}
+
+
+.input-icon {
+  position: absolute;
+  height: 1.75rem;
+  width: 1.75rem;
+  left: 1.75rem;
+  top: 0.75rem;
 }
