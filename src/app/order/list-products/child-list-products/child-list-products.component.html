@@ -2,9 +2,9 @@
   <div class="item" *ngFor="let i of fakeLength()"
        [ngStyle]="{width: size.itemWidth + 'px', height: size .itemHeight + 'px'}">
     <ion-img [src]="'http://placehold.it/380'"></ion-img>
-    <div style="position: absolute; bottom: 0; padding: 0.5rem; width: 100%; background: white; font-size: 70%">
-      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+    <div style="position: absolute; bottom: 0; padding: 0.5rem; width: 100%; background: white; font-size: 70%; display: flex; flex-direction: column">
+      <div class="skeleton-box" style="width: 60%"></div>
+      <div class="skeleton-box" style="width: 40%"></div>
     </div>
   </div>
 </div>
