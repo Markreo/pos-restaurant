@@ -51,19 +51,12 @@
               <div class="category-item" *ngFor="let subCate of subCategories"
                    (click)="selectSubCategory(subCate)"
                    [class.active]="currentSubCate && currentSubCate.id === subCate.id">
-<!--                <img *ngIf="subCate.icon" [src]="subCate.icon" alt="" style="height: 1rem; width: 1rem; margin-right: 0.5rem">-->
                 <img [src]="'/assets/icon/buger.png'" alt="" style="height: 1rem; width: 1rem; margin-right: 0.5rem">
                 {{subCate.name}}
               </div>
             </div>
-            <div class="items" style="flex: 1; overflow: auto">
               <app-list-products [location]="location" (slidesLength)="updatePagination($event)"
                                  (slidesIndex)="currentIndex=$event"></app-list-products>
-            </div>
-            <div class="items-pagination">
-              <div *ngFor="let page of slides; let i = index" [class.active]="i == currentIndex"
-                   class="item-pagination"></div>
-            </div>
           </div>
 
           <div class="payment"

@@ -1,3 +1,8 @@
+:host {
+  flex: 1;
+  min-height: 0;
+}
+
 @keyframes opacityOn {
   0% {
     opacity: 0;
@@ -15,6 +20,7 @@
     opacity: 1;
   }
 }
+
 :host {
   ::ng-deep .item {
     position: relative;
@@ -26,7 +32,7 @@
     border-radius: 11.25px;
     animation: opacityOn 500ms ease-in;
 
-    &:hover{
+    &:hover {
       border: 2px solid #ffcb2a;
     }
   }

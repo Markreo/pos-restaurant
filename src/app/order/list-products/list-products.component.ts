@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ProductService} from '../../_services/product.service';
 import {Subject} from 'rxjs';
-import {debounceTime, switchMap} from 'rxjs/operators';
+import {debounceTime, switchMap, tap} from 'rxjs/operators';
 import {LocationEntity} from '../../_models/location.entity';
 import {Product} from '../../_models/product';
-import {IonSlides} from '@ionic/angular';
+import {IonInfiniteScroll, IonSlides} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 
 @Component({
@@ -18,13 +18,13 @@ export class ListProductsComponent implements OnInit {
   @Output() slidesIndex = new EventEmitter<number>();
   filterObject = {
     max: 12,
-    type: 'STORE'
+    type: 'STORE',
+    start: 0
   };
   productSubject = new Subject();
   total = 0;
-  productsAtPage1: Product[] = [];
+  products: Product[] = [];
 
-  loading = true;
   slides = [];
   currentIndex = 0;
   itemSetting = {
@@ -34,6 +34,7 @@ export class ListProductsComponent implements OnInit {
 
 
   @ViewChild(IonSlides, {static: true}) slidesRef: IonSlides;
+  @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll: IonInfiniteScroll;
 
   constructor(private productService: ProductService, private storage: Storage) {
   }
@@ -63,18 +64,18 @@ export class ListProductsComponent implements OnInit {
     this.productSubject.pipe(
       debounceTime(300),
       switchMap(filter => {
-        this.loading = true;
-        console.log('filter', filter);
         return this.productService.getAllWithFilter(this.location.id, filter);
+      }),
+      tap(() => {
+        if (this.infiniteScroll) {
+          this.infiniteScroll.complete();
+        }
       })
     ).subscribe(({total, data}) => {
-      this.loading = false;
       this.total = total;
-      this.productsAtPage1 = data;
-
+      this.products = this.products.concat(data);
       this.buildSlides();
     }, error => {
-      this.loading = false;
     });
   }
 
@@ -89,11 +90,12 @@ export class ListProductsComponent implements OnInit {
 
   updateFilter(filter) {
     this.filterObject = {...this.filterObject, ...filter};
+    this.products = [];
+    this.filterObject.start = 0;
     this.updateData();
   }
 
   updateData() {
-    this.loading = true;
     this.productSubject.next(this.filterObject); // todo: reset page
   }
 
@@ -115,5 +117,16 @@ export class ListProductsComponent implements OnInit {
 
   fakeLength() {
     return Array(this.filterObject.max).fill(0).map((x, i) => i);
+  }
+
+  loadData() {
+    if (this.filterObject.start + this.filterObject.max < this.total) {
+      this.filterObject.start += this.filterObject.max;
+      this.updateData();
+    } else {
+      if (this.infiniteScroll) {
+        this.infiniteScroll.complete();
+      }
+    }
   }
 }
