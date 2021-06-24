@@ -37,5 +37,6 @@
   "cash": "Tiền mặt",
   "voucher": "Voucher",
   "pay_with_golf": "Pay with golf",
-  "update_order": "Cập nhật"
+  "update_order": "Cập nhật",
+  "no_product": "Không có sản phẩm nào!"
 }

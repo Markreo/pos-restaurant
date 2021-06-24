@@ -37,5 +37,6 @@
   "cash": "Cash",
   "voucher": "Voucher",
   "pay_with_golf": "Pay with golf",
-  "update_order": "Update order"
+  "update_order": "Update order",
+  "no_product": "No data to display"
 }

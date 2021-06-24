@@ -54,7 +54,7 @@ export class ListProductsComponent implements OnInit {
         };
       }
       const {itemPerSlide, ...itemSetting} = settings;
-      this.filterObject.max = itemPerSlide;
+      this.filterObject.max = Number(itemPerSlide);
       this.itemSetting = itemSetting;
     });
   }
