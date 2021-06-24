@@ -5,8 +5,7 @@ ion-content {
 }
 
 .categories {
-  min-height: 50px;
-  padding: 12.5px;
+  height: 3rem;
   overflow: auto;
   display: flex;
   min-width: 0;
@@ -14,7 +13,6 @@ ion-content {
 
   .category-item {
     margin-right: 1rem;
-    margin-bottom: 0.5rem;
     border-radius: 20px;
     display: flex;
     justify-content: center;
