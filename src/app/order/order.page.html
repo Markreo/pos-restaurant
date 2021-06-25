@@ -37,10 +37,10 @@
             </div>
           </div>
           <button style="margin-left: 1.5rem" (click)="toggleLang()">
-            <img src="/assets/icon/lan.png" alt="" style="height: 4rem; width: 4rem">
+            <img class="icon" [src]="'/assets/icon/' + currentLang.toUpperCase() + '.png'" alt="" style="height: 4rem; width: 4rem">
           </button>
           <button style="margin-left: 1.5rem">
-            <img src="/assets/icon/lock.png" alt="" style="height: 4rem; width: 4rem">
+            <img class="icon" src="/assets/icon/lock.png" alt="" style="height: 4rem; width: 4rem">
           </button>
         </div>
         <div class="main-content"
