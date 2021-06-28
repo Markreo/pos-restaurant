@@ -32,11 +32,18 @@
   "submit_success": "Đặt món thành công",
   "submit_error": "Đã có lỗi sảy ra!",
   "update_success": "Cập nhật thành công",
-  "total_payment" : "Tổng tiền thanh toán",
+  "total_payment": "Tổng tiền thanh toán",
   "username": "Tài khoản",
   "cash": "Tiền mặt",
-  "voucher": "Voucher",
+  "voucher": "Phiếu giảm giá",
   "pay_with_golf": "Pay with golf",
   "update_order": "Cập nhật",
-  "no_product": "Không có sản phẩm nào!"
+  "no_product": "Không có sản phẩm nào!",
+  "name": "Tên",
+  "discount": "Giảm giá",
+  "description": "Ghi chú",
+  "guest": "Khách",
+  "save": "Lưu",
+  "apply_voucher": "Áp dụng phiếu giảm giá",
+  "voucher_applied": "Đã áp dụng"
 }

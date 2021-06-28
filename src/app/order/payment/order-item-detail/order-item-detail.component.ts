@@ -4,6 +4,7 @@ import {GuestService} from '../../../_services/guest.service';
 import {GolfClubService} from '../../../_services/golf-club.service';
 import {ModalController, ToastController} from '@ionic/angular';
 import {OrderService} from '../../../_services/order.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-item-detail',
@@ -29,7 +30,8 @@ export class OrderItemDetailComponent implements OnInit {
               private orderService: OrderService,
               private modalController: ModalController,
               private toastController: ToastController,
-              private golfClubService: GolfClubService) {
+              private golfClubService: GolfClubService,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -118,7 +120,15 @@ export class OrderItemDetailComponent implements OnInit {
   }
 
   remove() {
-    this.removeItem();
-    this.modalController.dismiss();
+    if (this.item.id) {
+      // should do not work
+    } else {
+      this.removeItem();
+      this.modalController.dismiss();
+    }
+  }
+
+  get currentLang() {
+    return this.translate.currentLang;
   }
 }

@@ -5,20 +5,21 @@
   </div>
   <div style="flex: 1; margin-left: 2rem; display: flex; flex-direction: column">
     <div>
-      <h2 style="margin-top: 0; margin-bottom: 1rem">Name: <strong>{{item.variant.name}}</strong></h2>
+      <h2 style="margin-top: 0; margin-bottom: 1rem">{{'name' | translate}}:
+        <strong>{{currentLang === 'vi' ? item.variant.other_name : item.variant.name}}</strong></h2>
     </div>
     <div style="display: flex; flex: 1; min-height: 0">
       <div style="flex: 1; display: flex; flex-direction: column">
         <div style="margin-bottom: 1rem; display: flex; align-items: center">
 
-          <div class="my-label">Price:</div>
+          <div class="my-label">{{'price' |  translate}}:</div>
           <input placeholder="Price" #inputPrice
                  (focus)="markFocus('inputPrice')"
                  style="flex: 1;height: 2.5rem; border:2px solid #dee2e6 !important; border-radius: 0 !important; padding-left: 10px; padding-right: 10px"
                  type="number" [(ngModel)]="item.price">
         </div>
         <div style="margin-bottom: 1rem;display: flex; align-items: center">
-          <div class="my-label">Quantity:</div>
+          <div class="my-label">{{'quantity' | translate}}:</div>
           <ion-icon class="ion-padding" name="remove-outline" (click)="decrease($event)"></ion-icon>
           <input #inputQty [(ngModel)]="item.quantity" (focus)="markFocus('inputQty')"
                  style="margin: 0 1rem;border: 2px solid #dee2e6; display: flex; width: 3rem; height: 2.5rem; text-align: center;border-radius: 0 !important; ">
@@ -28,7 +29,7 @@
         <div
           style="margin-bottom: 1rem;display: flex; min-height: 0; align-items: stretch; flex: 1;">
           <div class="my-label">
-            Description:
+            {{'description' | translate}}:
           </div>
           <textarea #inputDescription [(ngModel)]="item.description" placeholder="Description"
                     (focus)="markFocus('inputDescription')"
@@ -38,7 +39,7 @@
       <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; margin-left: 1rem">
         <div>
           <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">
-            <div class="my-label">Discount:</div>
+            <div class="my-label">{{'discount' | translate}}:</div>
             <input #inputDiscountType [(ngModel)]="item.discount" (focus)="markFocus('inputDiscountType')"
                    style="flex:1 ;border: 2px solid #dee2e6; width: 6rem; height: 2.5rem; text-align: left; border-radius: 0 !important; padding-left: 1rem">
             <div>
@@ -52,7 +53,7 @@
 
           <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">
             <div class="my-label">
-              Guest:
+              {{'guest' | translate}}:
             </div>
             <input *ngIf="!item.guest"
                    #inputBagtag
@@ -79,11 +80,12 @@
           </div>
           <div style="margin-top: 0; margin-bottom: 1rem; height: 2.5rem; display: flex; align-items: center">
             <div class="my-label">
-              Voucher:
+              {{'voucher'| translate}}:
             </div>
             <div style="flex: 1">
-              <i *ngIf="item.is_voucher">Voucher applied</i>
-              <ion-button *ngIf="!item.is_voucher" color="light" (click)="markApplyVoucher()"> Apply voucher
+              <i *ngIf="item.is_voucher">{{'voucher_applied' | translate}}</i>
+              <ion-button *ngIf="!item.is_voucher" color="light" (click)="markApplyVoucher()">
+                {{'apply_voucher' | translate}}
               </ion-button>
             </div>
           </div>
@@ -92,7 +94,7 @@
           <ion-button color="danger" fill="outline" *ngIf="!item.id" (click)="remove()">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
-          <ion-button color="primary" (click)="onClickSave()">Save</ion-button>
+          <ion-button color="primary" (click)="onClickSave()">{{'save'| translate}}</ion-button>
         </div>
       </div>
     </div>

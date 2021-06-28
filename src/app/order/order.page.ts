@@ -116,6 +116,7 @@ export class OrderPage implements OnInit {
   }
 
   getCategoryFormMenu(menuId) {
+    console.log('get categofri form menu')
     return this.menuService.getListCategoriesByMenu(menuId);
   }
 
