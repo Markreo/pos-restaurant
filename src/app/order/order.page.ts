@@ -116,7 +116,7 @@ export class OrderPage implements OnInit {
   }
 
   getCategoryFormMenu(menuId) {
-    console.log('get categofri form menu')
+    console.log('get categofri form menu');
     return this.menuService.getListCategoriesByMenu(menuId);
   }
 
@@ -129,8 +129,10 @@ export class OrderPage implements OnInit {
   loadMenu(location) {
     this.menuService.getMenuByLocation(location.id).subscribe(resp => {
       this.menus = resp.data;
-      console.log('menu', this.menus);
-    });
+      if (this.menus) {
+        this.selectMenu(this.menus[0]);
+      }
+    }, error => {});
   }
 
   loadCategory(location: LocationEntity) {

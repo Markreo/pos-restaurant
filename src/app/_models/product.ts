@@ -5,6 +5,8 @@ export class Product {
   name;
   other_name;
   image;
+  price;
+  sale_price;
   formatted_sale_price;
   variants: Variant[] = [];
 }
